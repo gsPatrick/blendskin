@@ -38,8 +38,9 @@ export default function Dobra2Gloss() {
   const title = "Lábios Perfeitos"; // Título mais curto e impactante
   const description = "Volume, hidratação e brilho que transformam seu sorriso."; // Frase de efeito
   // Removido: benefits array
-  // **VERIFIQUE ESTE CAMINHO E NOME DO ARQUIVO DO VÍDEO!**
+  // **VERIFIQUE ESTE CAMINHO E NOME DO ARQUIVO DO VÍDEO E AGORA DO POSTER!**
   const videoSrc = "/video/Blendskin - Paula Freitas - Vídeo 2 - Gloss.mp4";
+  const posterSrc = "/images/gloss-poster.jpg"; // <<-- Adicione um caminho para o poster!
   const ctaLink = "https://wa.me/5562984077070";
 
   return (
@@ -49,10 +50,9 @@ export default function Dobra2Gloss() {
         className={styles.sectionVideo}
         autoPlay
         loop
-        muted
-        playsInline
-        // Adicione um póster para mostrar enquanto o vídeo carrega (opcional)
-        // poster="/images/gloss-poster.jpg"
+        muted // <<< CONFIRMADO: Muted está presente
+        playsInline // <<< CONFIRMADO: PlaysInline está presente
+        poster={posterSrc} // <<< ADICIONADO o atributo poster! Crie a imagem!
       >
         <source src={videoSrc} type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
