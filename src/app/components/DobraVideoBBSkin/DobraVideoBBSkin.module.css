@@ -1,0 +1,106 @@
+/* app/components/DobraVideoBBSkin/DobraVideoBBSkin.module.css */
+
+.videoSection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-petroleo); /* Cor de fallback */
+}
+
+.videoBackground {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.videoOverlay {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(var(--color-petroleo-rgb), 0.5); /* Overlay para contraste */
+  z-index: 1;
+}
+
+.videoContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--color-branco);
+  padding: 0 20px;
+  max-width: 960px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.videoTitle {
+  font-family: var(--font-titulo);
+  font-size: 5.5rem; /* Tamanho massivo para o título do produto */
+  font-weight: 600;
+  color: var(--color-branco);
+  line-height: 1.1;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.videoSubtitle {
+  font-family: var(--font-corpo);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-branco);
+  max-width: 700px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.ctaButton {
+  font-family: var(--font-corpo);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-petroleo);
+  background-color: var(--color-dourado);
+  padding: 16px 32px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-top: 1rem;
+}
+
+.ctaButton:hover {
+  background-color: transparent;
+  color: var(--color-dourado);
+  border-color: var(--color-dourado);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(var(--color-petroleo-rgb), 0.2);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  .videoTitle { font-size: 3.2rem; }
+  .videoSubtitle { font-size: 1.1rem; }
+  .ctaButton { font-size: 0.9rem; padding: 14px 28px; }
+}
+
+@media (max-width: 480px) {
+  .videoTitle { font-size: 2.5rem; }
+  .videoSubtitle { font-size: 1rem; }
+}

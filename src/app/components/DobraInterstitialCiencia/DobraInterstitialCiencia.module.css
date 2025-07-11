@@ -1,0 +1,305 @@
+/* components/DobraInterstitialCiencia/DobraInterstitialCiencia.module.css */
+
+.interstitialSection {
+  position: relative;
+  width: 100%; /* Seção ocupa a largura total */
+  min-height: 70vh; /* Altura menor */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Padding vertical ajustado, padding horizontal será no contentContainer */
+  padding: 60px 0;
+
+  /* --- Cor de fundo especificada --- */
+  background-color: #bdae9a; /* A cor especificada */
+  /* --------------------------------- */
+
+  color: var(--color-petroleo); /* Cor padrão do texto (será ajustado para o impactoPhrase) */
+
+  /* --- Linhas divisórias (pseudo-elementos) --- */
+  /* Linha no topo */
+  &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      /* Cor da linha - use uma cor que contraste suavemente com o fundo */
+      background-color: rgba(255, 255, 255, 0.4); /* Branco semi-transparente */
+      z-index: 1; /* Garante que fique acima do background */
+  }
+  /* Linha na parte inferior */
+  &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      /* Use a mesma cor ou uma diferente */
+      background-color: rgba(255, 255, 255, 0.4);
+      z-index: 1;
+  }
+  /* ----------------------------------------- */
+
+
+  /* --- Estado Inicial para Animação CSS --- */
+  /* A seção começa invisível ou com algum transform */
+  opacity: 0;
+  transform: translateY(50px); /* Começa um pouco abaixo */
+  /* ---------------------------------------- */
+  /* Transição para a animação de entrada da seção inteira */
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* --- ESTADO FINAL (quando a classe isVisible é adicionada) --- */
+.interstitialSection.isVisible {
+    opacity: 1;
+    transform: translateY(0); /* Vai para a posição final */
+}
+/* --------------------------------------------------------- */
+
+
+.contentContainer {
+  position: relative; /* Necessário para posicionar a caixa flutuante (se estivesse aqui) */
+  z-index: 2; /* Acima das linhas */
+  display: flex;
+  flex-direction: row; /* Layout 50/50 */
+  flex-wrap: wrap;
+  justify-content: center; /* Centraliza */
+  align-items: center; /* Centraliza verticalmente os lados */
+  gap: 40px; /* Espaçamento entre os lados */
+  max-width: 1200px; /* Largura máxima do conteúdo */
+  width: 100%;
+  padding: 0 40px; /* Padding horizontal para o conteúdo interno */
+}
+
+.textSide {
+  flex: 1; /* Ocupa espaço flexível */
+  min-width: 280px;
+  max-width: 500px;
+  text-align: left;
+  /* No padding horizontal já está no contentContainer */
+}
+
+.imageSide {
+  flex: 1; /* Ocupa espaço flexível */
+  min-width: 300px;
+  max-width: 600px; /* Ajuste o tamanho da imagem e seu container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* No padding horizontal já está no contentContainer */
+  position: relative; /* Necessário para posicionar a caixa flutuante dentro dele */
+  height: auto; /* Altura ajusta com o conteúdo */
+}
+
+.impactPhrase {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; /* Tamanho impactante, ajustado */
+  line-height: 1.1;
+  /* --- MUDANÇA: Cor da frase principal para branco --- */
+  color: var(--color-branco);
+  /* ------------------------------------------------- */
+  /* --- MUDANÇA: Peso da fonte para mais grosso (700 já é o máximo importado) --- */
+  font-weight: 700;
+  /* --------------------------------------------------------------------------- */
+  margin: 0;
+
+   /* --- Estado Inicial (opacidade 0, slide) - Animado com a seção --- */
+   /* opacity: 0; */
+   /* transform: translateY(30px); */
+   /* ------------------------------------------------------------- */
+   /* Transição - Não precisa se a animação for na seção pai */
+   /* transition: opacity 1.2s ease-out, transform 1.2s ease-out; */
+}
+
+.highlightText {
+    /* --- MUDANÇA: Cor Dourada para a parte destacada (mantido) --- */
+    color: var(--color-dourado);
+    /* ----------------------------------------------------------- */
+}
+
+.productImage {
+  display: block;
+  max-width: 100%;
+  height: auto;
+   /* Ajuste se precisar que a imagem preencha o 50% da altura */
+   /* width: 100%; height: 100%; object-fit: cover; */
+  filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
+
+  /* --- Estado Inicial (opacidade 0, escala) - Animado com a seção --- */
+   /* opacity: 0; */
+   /* transform: scale(0.9); */
+   /* ------------------------------------------------------------- */
+   /* Transição - Não precisa se a animação for na seção pai */
+   /* transition: opacity 1.5s ease-out, transform 1.5s ease-out; */
+}
+
+.productImage:hover {
+    transform: scale(1.05);
+}
+
+
+.floatingCard {
+    position: absolute; /* Posicionamento flutuante relativo ao .imageSide */
+    z-index: 3; /* Acima da imagem e conteúdo */
+    background-color: var(--color-branco); /* Fundo branco */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    max-width: 300px; /* Largura da caixa */
+    text-align: left;
+    color: var(--color-petroleo);
+
+
+    /* --- NOVO POSICIONAMENTO DESKTOP --- */
+    /* Remove as regras antigas de desktop e define as novas */
+    top: 80px; /* Distância do topo do imageSide (ajuste conforme necessário) */
+    right: -100px; /* Posiciona a caixa 100px para fora da direita do imageSide */
+    left: auto; /* Garante que o left não interfira */
+    bottom: auto; /* Garante que o bottom não interfira */
+    /* ----------------------------------- */
+
+
+    /* --- Estado Inicial para Animação CSS (opacidade 0, slide in) --- */
+     opacity: 0;
+     transform: scale(0.9); /* Começa um pouco menor */
+    /* --------------------------------------------------- */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Transição da caixa */
+}
+
+/* --- ESTADO FINAL DA CAIXA FLUTUANTE (quando a seção é visível) --- */
+.interstitialSection.isVisible .floatingCard {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.8s; /* Anima a caixa depois do texto e imagem */
+}
+
+
+.floatingCard h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.5em;
+    color: var(--color-petroleo);
+}
+
+.floatingCard p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+
+/* --- Responsividade --- */
+@media (max-width: 900px) {
+  .interstitialSection {
+      /* A animação da seção inteira já lida com a transição */
+      /* Remove estados iniciais e transições individuais se estavam aqui */
+      min-height: auto; /* Permite que a altura se ajuste ao conteúdo empilhado */
+      padding-top: 40px; /* Adiciona padding superior */
+      padding-bottom: 40px; /* Adiciona padding inferior */
+  }
+
+  .contentContainer {
+    flex-direction: column; /* Empilha */
+    gap: 30px;
+    padding: 0 20px; /* Ajusta padding horizontal */
+  }
+
+  .textSide,
+  .imageSide {
+      flex: auto;
+      width: 100%;
+      max-width: 100%;
+      padding: 0; /* Remove padding, já no contentContainer */
+  }
+
+  .textSide {
+      order: 2; /* Texto abaixo da imagem */
+      text-align: center;
+      /* Animação de entrada no mobile (opcional, mas boa prática) */
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease-out 0.5s, transform 1.2s ease-out 0.5s; /* Delay para aparecer depois da imagem */
+  }
+  /* Estado final para o textSide no mobile */
+  .interstitialSection.isVisible .textSide {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+
+  .imageSide {
+      order: 1; /* Imagem acima do texto */
+      /* Animação de entrada no mobile (opcional) */
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease-out 0.3s, transform 1.2s ease-out 0.3s; /* Delay menor */
+  }
+   /* Estado final para o imageSide no mobile */
+  .interstitialSection.isVisible .imageSide {
+      opacity: 1;
+      transform: translateY(0);
+  }
+
+
+  .impactPhrase {
+      font-size: 2.5rem; /* Ajuste para mobile */
+      /* remove animação inicial/transição se estava aqui */
+       /* Cor branca e peso 700 já aplicados acima */
+  }
+
+   .productImage {
+       /* remove animação inicial/transição se estava aqui */
+       width: 100%; /* Garante que a imagem ocupe a largura total disponível */
+       height: auto;
+       object-fit: contain; /* Garante que a imagem seja visível inteira */
+   }
+
+   /* --- MUDANÇA PRINCIPAL: Caixa flutuante no mobile sobre a imagem --- */
+   .floatingCard {
+       /* Mantém position: absolute */
+       position: absolute;
+       /* Remove as propriedades de desktop e adiciona as de mobile */
+       top: auto; /* Remove a regra do desktop */
+       right: 20px;
+       bottom: 20px;
+       left: 20px; /* Adiciona left para definir a largura baseada em margens */
+       max-width: none; /* Remove o max-width fixo */
+       width: auto; /* Permite que a largura seja definida por left/right */
+       padding: 20px; /* Padding interno menor */
+       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Sombra ajustada */
+
+       /* Animação controlada pela regra .isVisible .floatingCard geral */
+       /* opacity: 1; transform: scale(1); */ /* Já definidos na regra geral .isVisible .floatingCard */
+   }
+
+    /* --- ESTADO FINAL RESPONSIVO (quando a seção é visível) --- */
+   /* As regras .isVisible .textSide e .isVisible .imageSide lidam com a animação empilhada */
+   /* A regra .interstitialSection.isVisible .floatingCard lida com a caixa */
+}
+
+@media (max-width: 480px) {
+    .interstitialSection {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    .impactPhrase {
+        font-size: 2rem;
+         /* Cor branca e peso 700 já aplicados acima */
+    }
+     .floatingCard {
+         padding: 15px; /* Padding menor */
+     }
+     .floatingCard h4 {
+         font-size: 1.3rem;
+     }
+     .floatingCard p {
+         font-size: 0.9rem;
+     }
+}

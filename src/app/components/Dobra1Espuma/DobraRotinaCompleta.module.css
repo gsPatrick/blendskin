@@ -1,0 +1,198 @@
+/* app/components/DobraRotinaCompleta/DobraRotinaCompleta.module.css */
+
+.dobraSection {
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+/* --- Lado da Mídia (ESQUERDA) --- */
+.mediaSide {
+    flex: 0 0 50%;
+    height: 100%;
+    background-color: #d1b57e; /* Cor de fallback caso a imagem demore */
+
+    /* Animação vindo da esquerda */
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* --- Lado do Conteúdo (DIREITA) --- */
+.textSide {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 100px;
+    overflow-y: auto;
+    background-color: #EAE0D1; /* Mesmo bege sofisticado */
+
+    /* Animação vindo da direita */
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
+}
+
+.dobraSection.isVisible .mediaSide,
+.dobraSection.isVisible .textSide {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.productImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Estilos do conteúdo (idênticos) --- */
+.sectionTitle {
+    position: relative;
+    font-family: var(--font-titulo);
+    font-size: 3.2rem;
+    color: var(--color-petroleo);
+    line-height: 1.15;
+    margin-bottom: 0.7em;
+    padding-top: 1.2em;
+}
+
+.sectionTitle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-dourado);
+}
+
+.sectionDescription {
+    font-family: var(--font-corpo);
+    font-size: 1.1rem;
+    color: var(--color-petroleo);
+    line-height: 1.6;
+    margin-bottom: 3em;
+    max-width: 550px;
+}
+
+.accordion {
+    width: 100%;
+    max-width: 550px;
+    border-top: 1px solid rgba(var(--color-petroleo-rgb), 0.15);
+}
+
+.accordionItem {
+    border-bottom: 1px solid rgba(var(--color-petroleo-rgb), 0.15);
+}
+
+.accordionHeader {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 25px 0;
+    text-align: left;
+    font-family: var(--font-corpo);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-petroleo);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.accordionHeader.isOpen {
+    color: var(--color-dourado);
+}
+
+.accordionIcon {
+    font-family: monospace;
+    font-size: 1.5rem;
+    font-weight: normal;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.accordionIcon::before {
+    content: '›';
+    display: block;
+    transform: rotate(90deg);
+}
+.accordionIcon.isOpen {
+    transform: rotate(180deg);
+}
+.accordionIcon.isOpen::before {
+    transform: rotate(90deg);
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+.accordionContent.isOpen {
+    max-height: 200px;
+}
+
+.accordionContentInner {
+    padding: 0 0 25px 0;
+    font-family: var(--font-corpo);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.finalCtaLink {
+    font-family: var(--font-corpo);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-petroleo);
+    margin-top: 2.5em;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.finalCtaLink:hover {
+    color: var(--color-dourado);
+    text-decoration: underline;
+}
+
+.finalCtaLink span {
+    margin-left: 0.5em;
+    transition: transform 0.3s ease;
+}
+
+.finalCtaLink:hover span {
+    transform: translateX(5px);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 900px) {
+    .dobraSection {
+        flex-direction: column; /* Imagem fica no topo no mobile */
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .mediaSide {
+        flex: 1;
+        width: 100%;
+        height: 60vh;
+    }
+    
+    .textSide {
+        flex: 1;
+        width: 100%;
+        padding: 60px 20px;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .sectionTitle::before { left: 50%; transform: translateX(-50%); }
+    .sectionTitle { font-size: 2.5rem; padding-top: 1.5em; }
+    .sectionDescription { font-size: 1rem; }
+}

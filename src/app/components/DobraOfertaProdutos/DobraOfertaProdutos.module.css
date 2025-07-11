@@ -1,0 +1,367 @@
+/* app/components/DobraOfertaProdutos/DobraOfertaProdutos.module.css */
+
+.ofertaProdutosSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 40px;
+  overflow: hidden;
+  background-color: var(--color-petroleo);
+  background-image:
+    radial-gradient(ellipse 80% 80% at 50% -20%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)),
+    radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1.5px);
+  background-size: 100% 100%, 3px 3px;
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+.ofertaProdutosSection.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.introContent, .individualProductsIntro { text-align: center; }
+.introContent { margin-bottom: 60px; }
+.individualProductsIntro { margin-bottom: 40px; }
+
+.sectionTitle {
+  font-family: var(--font-titulo);
+  font-size: 3.5rem;
+  color: var(--color-branco);
+}
+
+.individualProductsIntro h3 {
+  font-family: var(--font-corpo);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Estilos do Kit (Refinados) --- */
+.kitContainer {
+  width: 100%;
+  max-width: 1100px; /* Largura máxima no desktop */
+  margin: 0 auto 80px auto; /* Centraliza e adiciona margem inferior */
+  opacity: 0; transform: scale(0.95);
+  transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s;
+}
+.ofertaProdutosSection.isVisible .kitContainer { opacity: 1; transform: scale(1); }
+
+.kitCard {
+  display: flex; background: linear-gradient(145deg, #1f3c61, #132a47);
+  color: var(--color-branco); border-radius: 16px; overflow: hidden;
+  position: relative; transition: all 0.4s ease;
+  flex-direction: row; /* Layout padrão desktop */
+}
+.kitCard:hover { box-shadow: 0 0 40px rgba(var(--color-dourado-rgb), 0.3); transform: translateY(-5px); }
+.kitCard::before {
+  content: ''; position: absolute; inset: 0; border-radius: 16px;
+  padding: 2px; background: linear-gradient(145deg, var(--color-dourado), #e6c57f);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.kitImageSide { flex: 0 0 50%; }
+.kitImageSide img { width: 100%; height: 100%; object-fit: cover; }
+.kitContentSide, .kitImageSide { z-index: 1; }
+.kitContentSide { flex: 1; padding: 60px; text-align: left; } /* Ajustado text-align */
+.kitTitle { font-size: 2.5rem; color: var(--color-branco); }
+.kitCtaButton {
+  display: inline-block; /* Ajustado para inline-block */
+  /* ...outros estilos do botão do kit... */
+  background-color: var(--color-dourado);
+  color: var(--color-petroleo);
+  border: 1px solid transparent;
+  padding: 18px 35px; border-radius: 10px;
+  text-align: center; font-weight: 700;
+  margin-top: 2em; /* Espaço acima do botão */
+  transition: all 0.3s ease; text-transform: uppercase;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+.kitCtaButton:hover {
+  background-color: var(--color-branco);
+  color: var(--color-petroleo);
+  transform: scale(1.05);
+}
+.recommendedTag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--color-dourado);
+  color: var(--color-petroleo);
+  font-family: var(--font-corpo);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 2;
+  text-transform: uppercase;
+}
+.socialProofIcons {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8); /* Branco suave para os ícones */
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: flex-start; /* Alinha à esquerda no desktop */
+  align-items: center;
+  flex-wrap: wrap; /* Quebra linha se houver muitos */
+}
+.socialProofIcons span {
+  margin: 0 8px 0 0; /* Espaço entre os itens de prova social */
+  font-weight: 300;
+  white-space: nowrap; /* Impede quebras de linha dentro do span */
+}
+
+
+/* --- Cards Individuais (DESIGN TOTALMENTE NOVO) --- */
+.productsGrid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 40px; width: 100%; max-width: 1200px;
+}
+
+.productCard {
+  display: flex; flex-direction: column;
+  border-radius: 16px; padding: 30px;
+
+  /* Habilita o contexto 3D */
+  transform-style: preserve-3d;
+
+  /* Efeito de Vidro Fosco */
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Estado inicial para animação de entrada */
+  opacity: 0;
+  transform: perspective(1000px) translateY(60px) scale(0.95) rotateX(-15deg);
+
+  /* Transição suave para o reset no mouseleave */
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+              opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+/* Animação Stagger de entrada */
+.ofertaProdutosSection.isVisible .productCard {
+  opacity: 1;
+  transform: perspective(1000px) translateY(0) scale(1) rotateX(0deg);
+}
+.ofertaProdutosSection.isVisible .productCard:nth-child(1) { transition-delay: 0.6s; }
+.ofertaProdutosSection.isVisible .productCard:nth-child(2) { transition-delay: 0.8s; }
+.ofertaProdutosSection.isVisible .productCard:nth-child(3) { transition-delay: 1.0s; }
+
+.productCard:hover {
+  box-shadow: 0 0 35px rgba(var(--color-dourado-rgb), 0.3);
+  border-color: rgba(var(--color-dourado-rgb), 0.5);
+}
+
+.productImageContainer {
+  margin-bottom: 2em;
+  /* Efeito de profundidade 3D */
+  transform: translateZ(40px);
+}
+.productImageContainer img {
+  width: 100%; height: 300px; object-fit: contain;
+  filter: drop-shadow(0 15px 20px rgba(0,0,0,0.3));
+}
+
+.productInfo {
+  text-align: center;
+  /* Efeito de profundidade 3D */
+  transform: translateZ(20px);
+}
+
+/* --- CORES DO TEXTO CORRIGIDAS --- */
+.productName {
+  font-family: var(--font-titulo);
+  font-size: 1.8rem;
+  color: var(--color-branco); /* COR CORRIGIDA */
+  margin-bottom: 0.5em; line-height: 1.2;
+}
+
+.productPrice {
+  font-family: var(--font-corpo);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--color-dourado); /* COR CORRIGIDA */
+}
+
+.productCtaButton {
+  display: block; width: 100%;
+  background-color: var(--color-dourado);
+  color: var(--color-petroleo);
+  border: 1px solid transparent;
+  padding: 15px 20px; border-radius: 8px;
+  text-align: center; font-weight: 700;
+  margin-top: auto;
+  transition: all 0.3s ease; text-transform: uppercase;
+
+  /* Efeito de profundidade 3D */
+  transform: translateZ(30px);
+}
+.productCtaButton:hover {
+  background-color: transparent;
+  color: var(--color-dourado);
+  border-color: var(--color-dourado);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 1024px) { /* Tablets maiores e desktops menores */
+  .ofertaProdutosSection {
+      padding: 80px 30px; /* Ajuste padding */
+  }
+  .sectionTitle {
+      font-size: 3rem;
+  }
+  .individualProductsIntro h3 {
+      font-size: 1.1rem;
+  }
+  /* --- MUDANÇA: Ajuste do kitContainer para mobile/tablet --- */
+  .kitContainer {
+      max-width: 600px; /* Limita a largura do kit em tablets */
+      margin: 0 auto 60px auto; /* Centraliza e ajusta margem */
+  }
+  /* --- Fim da Mudança --- */
+
+  .kitCard {
+      flex-direction: column; /* Empilha imagem e conteúdo do kit */
+  }
+  .kitImageSide {
+      width: 100%; /* Ocupa 100% da largura do card */
+      height: 300px; /* Ajusta altura da imagem do kit */
+  }
+  .kitContentSide {
+      text-align: center; /* Centraliza o texto do kit no mobile */
+      padding: 40px 30px; /* Ajusta padding */
+  }
+   .kitTitle {
+       font-size: 2.2rem;
+   }
+   .kitItems {
+       font-size: 1.1rem;
+   }
+   .kitNewPrice {
+       font-size: 3.5rem;
+   }
+   .kitCtaButton {
+       font-size: 1.2rem;
+       padding: 15px 30px;
+   }
+   .socialProofIcons {
+       justify-content: center; /* Centraliza os ícones no mobile */
+   }
+   .socialProofIcons span {
+       margin: 0 5px; /* Espaço menor entre os itens */
+   }
+
+
+  .productsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Permite 2 ou 3 colunas, adapta */
+    gap: 30px;
+  }
+  .productImageContainer img { height: 250px; } /* Ajusta altura da imagem individual */
+  .productName { font-size: 1.6rem; }
+  .productPrice { font-size: 1.1rem; }
+  .productCtaButton { font-size: 0.95rem; padding: 10px 20px; }
+}
+
+@media (max-width: 768px) { /* Tablets menores e mobile */
+  .ofertaProdutosSection {
+    padding: 60px 20px;
+  }
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  .sectionSubtitle {
+    font-size: 1rem;
+  }
+  .kitContainer {
+      max-width: 100%; /* Permite ocupar a largura total no mobile */
+      margin-bottom: 50px; /* Ajusta margem */
+  }
+  .kitImageSide {
+    height: 250px; /* Ajusta altura da imagem do kit */
+  }
+  .kitContentSide {
+      padding: 30px 20px; /* Ajusta padding */
+  }
+  .kitTitle {
+      font-size: 2rem;
+  }
+  .kitItems {
+      font-size: 1rem;
+  }
+  .kitOldPrice, .kitInstallment, .kitTotalPrice {
+      font-size: 0.9rem;
+  }
+  .kitNewPrice {
+      font-size: 3rem;
+  }
+  .kitCtaButton {
+      font-size: 1.1rem;
+      padding: 15px 25px;
+  }
+  .socialProofIcons {
+      font-size: 0.8rem;
+  }
+
+
+  .productsGrid {
+    grid-template-columns: 1fr; /* Uma coluna no mobile (empilha os produtos) */
+    gap: 30px;
+    max-width: 350px; /* Limita a largura dos cards individuais no mobile */
+     margin: 0 auto; /* Centraliza a grid */
+  }
+  .productCard {
+    padding: 25px;
+  }
+  .productImageContainer img { height: 200px; } /* Ajusta altura da imagem individual */
+  .productName { font-size: 1.5rem; }
+  .productDescription { font-size: 0.9rem; }
+  .productCtaButton { font-size: 0.9rem; padding: 10px 20px; }
+}
+
+@media (max-width: 480px) { /* Mobile muito pequeno */
+  .ofertaProdutosSection {
+    padding: 40px 15px;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  .sectionSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .kitImageSide {
+    height: 200px; /* Ajusta altura da imagem do kit */
+  }
+  .kitContentSide {
+    padding: 25px 15px; /* Ajusta padding */
+  }
+  .kitTitle {
+    font-size: 1.8rem;
+  }
+  .kitNewPrice {
+    font-size: 2.5rem;
+  }
+  .kitCtaButton {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+   .socialProofIcons span {
+       margin: 0 3px; /* Reduz espaço */
+   }
+
+  .productsGrid {
+    gap: 20px; /* Reduz gap */
+  }
+  .productImageContainer img { height: 150px; } /* Ajusta altura da imagem individual */
+  .productName { font-size: 1.4rem; }
+  .productDescription { font-size: 0.8rem; }
+  .productCtaButton { font-size: 0.85rem; padding: 8px 18px; }
+}

@@ -1,0 +1,285 @@
+/* components/Footer/Footer.module.css */
+
+.footerSection {
+  position: relative;
+  width: 100%;
+  padding: 80px 40px 40px; 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* --- MUDANÇA ESSENCIAL: Fundo Cinza Claro --- */
+  background-color: var(--color-cinza-claro);
+  color: var(--color-petroleo); /* Texto padrão do footer agora é Petróleo */
+
+  /* Linha superior removida, não existe na referência Velumia */
+
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+
+/* --- ESTADO FINAL (quando a seção está visível) --- */
+.footerSection.isVisible {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+
+.footerContentTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: flex-start; /* Alinha no topo */
+    gap: 60px; 
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    width: 100%;
+    margin-bottom: 100px; /* Espaço generoso antes do logo grande */
+    padding: 0 20px; 
+}
+
+.footerColumn {
+    flex: 1;
+    min-width: 200px; /* Largura mínima ajustada para caber 3 colunas */
+    max-width: 350px; /* Largura máxima ajustada */
+    text-align: left;
+    /* Ajustes para alinhar com a referência */
+    margin-top: 15px; /* Pequeno espaçamento do topo do footer */
+}
+
+.columnTitle {
+    font-family: var(--font-corpo); /* Títulos das colunas usam Satoshi */
+    font-size: 1.1rem; /* Tamanho do título ajustado (menor) */
+    color: var(--color-petroleo); /* Cor Petróleo */
+    font-weight: 500; /* Peso médio */
+    margin-bottom: 1.5em; /* Espaço abaixo do título ajustado */
+    letter-spacing: normal; /* Sem letter-spacing negativo */
+    text-transform: none; /* Sem caixa alta */
+    /* Remove o pseudo-elemento ::after (sublinhado) que não existe na referência Velumia */
+}
+
+
+.quickLinksList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quickLinksList li {
+    margin-bottom: 0.7em; /* Espaço entre os links ajustado */
+}
+
+.quickLinksList a {
+    font-family: var(--font-corpo); /* Satoshi para os links */
+    font-size: 1rem;
+    color: var(--color-petroleo); /* Links em Petróleo */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.quickLinksList a:hover {
+    color: var(--color-dourado); /* Hover em Dourado */
+}
+
+
+.footerColumn p {
+    font-family: var(--font-corpo); /* Satoshi para os parágrafos */
+    font-size: 1rem;
+    line-height: 1.6; /* Espaçamento entre linhas ajustado */
+    margin-bottom: 1em; /* Espaço entre parágrafos ajustado */
+    color: var(--color-petroleo); /* Parágrafos em Petróleo */
+}
+
+.footerColumn p a {
+     color: var(--color-petroleo); /* Links em parágrafos em Petróleo */
+     text-decoration: none;
+     transition: color 0.2s ease;
+}
+.footerColumn p a:hover {
+     color: var(--color-dourado); /* Hover em Dourado */
+     text-decoration: underline; /* Sublinhado no hover */
+}
+
+.copyrightClaim {
+    font-weight: 700; /* Mais forte */
+    margin-top: 1.5em; /* Espaçamento maior antes */
+}
+
+
+.socialIcons {
+    display: flex;
+    gap: 10px; /* Espaço entre os ícones ajustado */
+    margin-top: 2em; /* Mais espaço acima dos ícones */
+}
+
+.socialIcons a {
+    display: flex; /* Para centralizar o SVG */
+    justify-content: center;
+    align-items: center;
+    width: 40px; /* Tamanho do círculo */
+    height: 40px;
+    border-radius: 50%; /* Faz o círculo */
+    background-color: rgba(var(--color-petroleo-rgb), 0.05); /* Fundo sutil para o círculo */
+    color: var(--color-petroleo); /* Cor dos ícones em Petróleo */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.socialIcons a:hover {
+    background-color: rgba(var(--color-dourado-rgb), 0.1); /* Hover do fundo do círculo */
+    color: var(--color-dourado); /* Hover da cor do ícone */
+}
+
+.socialIcons svg {
+    width: 20px; /* Ícones menores */
+    height: 20px;
+    display: block;
+}
+
+
+.crueltyFreeBadge {
+    max-width: 90px; /* Tamanho do selo ajustado */
+    margin-top: 2em; /* Espaço acima do selo */
+    display: block;
+    height: auto;
+    filter: none; /* Remover filtro, a imagem deve ser escura para fundo claro */
+    box-shadow: none; /* Remover sombra */
+    margin-left: 0; /* Alinhar à esquerda na coluna */
+}
+
+
+.footerBottom {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.largeLogo {
+    max-width: 400px; /* Logo maior para impacto */
+    margin-bottom: 20px; /* Espaço abaixo do logo */
+    height: auto;
+    filter: none; /* Remover filtro, a imagem deve ser escura para fundo claro */
+    box-shadow: none; /* Remover sombra */
+}
+
+.tagline {
+    font-family: var(--font-corpo); /* Satoshi para a tagline */
+    font-size: 1.2rem; /* Tamanho da tagline ajustado */
+    color: var(--color-dourado); /* Tagline em Dourado para destaque */
+    font-weight: 400; /* Regular */
+    margin-bottom: 50px; /* Espaço abaixo da tagline */
+    line-height: 1.2;
+    font-style: italic; /* Em itálico como na referência */
+}
+
+.legalInfoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px; /* Largura máxima para a linha legal */
+    font-family: var(--font-corpo); /* Satoshi para informações legais */
+    font-size: 0.9rem; /* Tamanho da fonte ajustado */
+    color: var(--color-petroleo); /* Cor Petróleo */
+    padding-top: 20px; /* Espaço superior para a linha divisória (abaixo do logo/tagline) */
+    border-top: 1px solid rgba(var(--color-petroleo-rgb), 0.1); /* Linha divisória sutil */
+}
+
+.legalLink,
+.developedBy {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.legalLink a {
+    color: var(--color-petroleo);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.legalLink a:hover {
+    color: var(--color-dourado);
+    text-decoration: underline;
+}
+
+/* Adicionando um divisor vertical entre "Política de privacidade" e "Termos de uso" */
+.legalLink a:first-child::after {
+    content: ' | ';
+    margin: 0 5px; /* Espaço entre o link e o divisor */
+    color: rgba(var(--color-petroleo-rgb), 0.5); /* Cor sutil para o divisor */
+}
+
+
+/* --- Responsividade --- */
+@media (max-width: 900px) {
+   .footerContentTop {
+       flex-direction: column; 
+       align-items: center; 
+       gap: 40px; 
+       margin-bottom: 80px; /* Ajuste no espaçamento */
+       padding: 0 20px; 
+   }
+
+   .footerColumn {
+       width: 100%; 
+       max-width: 450px; 
+       text-align: center; /* Centraliza o texto dentro da coluna */
+   }
+
+   .socialIcons {
+       justify-content: center; /* Centraliza os ícones sociais */
+   }
+
+    .tagline {
+        font-size: 1.1rem; /* Mais suave no mobile */
+        margin-bottom: 40px;
+    }
+    .largeLogo {
+        max-width: 300px; /* Ajuste do logo no mobile */
+    }
+    .legalInfoContainer {
+        flex-direction: column; /* Empilha as informações legais */
+        gap: 15px; /* Espaço entre as linhas empilhadas */
+        text-align: center;
+    }
+     .legalLink a:first-child::after { /* O divisor é removido quando empilhado */
+        content: none;
+     }
+}
+
+@media (max-width: 480px) {
+    .footerSection {
+        padding: 60px 20px 30px; 
+    }
+    .columnTitle {
+        font-size: 1rem;
+        margin-bottom: 1em;
+    }
+     .quickLinksList a,
+     .footerColumn p,
+     .footerColumn p a {
+         font-size: 0.9rem;
+     }
+      .socialIcons a {
+          width: 36px; height: 36px;
+      }
+      .socialIcons svg {
+          width: 18px; height: 18px;
+      }
+      .tagline {
+          font-size: 1rem;
+          margin-bottom: 30px;
+      }
+      .largeLogo {
+          max-width: 250px;
+      }
+      .legalInfoContainer {
+          font-size: 0.8rem;
+          padding-top: 15px;
+      }
+}

@@ -1,0 +1,210 @@
+/* app/components/DobraDuoEssencial/DobraDuoEssencial.module.css */
+
+.dobraSection {
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+/* --- Lado do Conteúdo (Esquerda) com novo design --- */
+.textSide {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 100px; /* Mais respiro */
+    overflow-y: auto;
+    
+    /* --- NOVA COR DE FUNDO --- */
+    background-color: #EAE0D1; /* Bege quente e sofisticado */
+
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
+}
+
+/* --- Lado do Vídeo (Direita) --- */
+.videoSide {
+    flex: 0 0 50%;
+    height: 100%;
+    background-color: #d1b57e;
+
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.dobraSection.isVisible .textSide,
+.dobraSection.isVisible .videoSide {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.productVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Estilos do conteúdo de texto aprimorados --- */
+.sectionTitle {
+    position: relative; /* Para a linha decorativa */
+    font-family: var(--font-titulo);
+    font-size: 3.2rem;
+    color: var(--color-petroleo);
+    line-height: 1.15;
+    margin-bottom: 0.7em;
+    padding-top: 1.2em; /* Espaço para a linha */
+}
+
+/* --- LINHA DECORATIVA --- */
+.sectionTitle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-dourado);
+}
+
+.sectionDescription {
+    font-family: var(--font-corpo);
+    font-size: 1.1rem;
+    color: var(--color-petroleo);
+    line-height: 1.6;
+    margin-bottom: 3em; /* Mais espaço */
+    max-width: 550px;
+}
+
+/* --- ACORDEÃO REDESENHADO --- */
+.accordion {
+    width: 100%;
+    max-width: 550px;
+    border-top: 1px solid rgba(var(--color-petroleo-rgb), 0.15); /* Borda apenas no topo geral */
+}
+
+.accordionItem {
+    border-bottom: 1px solid rgba(var(--color-petroleo-rgb), 0.15); /* Borda suave em cada item */
+}
+
+.accordionHeader {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 25px 0; /* Mais espaçamento vertical */
+    text-align: left;
+    font-family: var(--font-corpo);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-petroleo);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+/* --- Destaque no título do acordeão aberto --- */
+.accordionHeader.isOpen {
+    color: var(--color-dourado);
+}
+
+.accordionIcon {
+    font-family: monospace; /* Garante que o caractere seja renderizado de forma consistente */
+    font-size: 1.5rem;
+    font-weight: normal;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+/* Novo ícone de seta (chevron) */
+.accordionIcon::before {
+    content: '›';
+    display: block;
+    transform: rotate(90deg);
+}
+.accordionIcon.isOpen {
+    transform: rotate(180deg);
+}
+.accordionIcon.isOpen::before {
+    transform: rotate(90deg);
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+.accordionContent.isOpen {
+    max-height: 200px;
+}
+
+.accordionContentInner {
+    padding: 0 0 25px 0; /* Mais padding inferior */
+    font-family: var(--font-corpo);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- NOVO LINK DE AÇÃO SUTIL --- */
+.finalCtaLink {
+    font-family: var(--font-corpo);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-petroleo);
+    margin-top: 2.5em;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.finalCtaLink:hover {
+    color: var(--color-dourado);
+    text-decoration: underline;
+}
+
+.finalCtaLink span {
+    margin-left: 0.5em;
+    transition: transform 0.3s ease;
+}
+
+.finalCtaLink:hover span {
+    transform: translateX(5px);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 1024px) {
+    .textSide { padding: 60px; }
+    .sectionTitle { font-size: 2.8rem; }
+}
+
+@media (max-width: 900px) {
+    .dobraSection {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .textSide {
+        flex: 1;
+        width: 100%;
+        padding: 60px 20px;
+        order: 2;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .sectionTitle::before { left: 50%; transform: translateX(-50%); }
+
+    .videoSide {
+        flex: 1;
+        width: 100%;
+        height: 60vh;
+        order: 1;
+    }
+    .sectionTitle { font-size: 2.5rem; padding-top: 1.5em; }
+    .sectionDescription { font-size: 1rem; }
+}

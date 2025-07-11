@@ -1,26 +1,72 @@
-@import "tailwindcss";
+/* app/globals.css */
+
+/*
+  IMPORTANTE: Importando as novas fontes de impacto via Fontshare.
+  Clash Display: Para títulos. Pesos 600 (SemiBold) e 700 (Bold) para máximo impacto.
+  Satoshi: Para textos. Pesos 400 (Regular), 500 (Medium) e 700 (Bold) para versatilidade.
+*/
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@700,600&f[]=satoshi@700,500,400&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-petroleo: #193355;
+  --color-dourado: #CFA34F;
+  --color-branco: #FFFFFF;
+  --color-cinza-claro: #F2F2F2;
+  --color-petroleo-rgb: 25, 51, 85;
+
+  /* --- MUDANÇA RADICAL NAS FONTES --- */
+  --font-titulo: 'Clash Display', sans-serif;
+  --font-corpo: 'Satoshi', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-corpo); /* <-- MUDANÇA: Fonte Satoshi para textos */
+  font-weight: 400; /* Peso padrão 'Regular' */
+  line-height: 1.6;
+  color: var(--color-petroleo);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-titulo); /* <-- MUDANÇA: Fonte Clash Display para TÍTULOS */
+    color: var(--color-petroleo);
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 600; /* <-- MUDANÇA: Peso SemiBold (600). É extremamente forte e denso. */
+    letter-spacing: -0.04em; /* <-- MUDANÇA: Mais apertado para criar mais densidade. */
+    line-height: 1.1; /* Linhas mais próximas para um bloco de texto mais sólido. */
+    /* Para impacto máximo, considere usar text-transform: uppercase; nos CSS Modules */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    font-family: var(--font-corpo); /* Botões usam a fonte de corpo, mas podemos ajustar o peso */
+}
+
+/* Estilos básicos para o scroll-snap (mantidos) */
+.scroll-container {
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.scroll-section {
+  min-height: 100vh;
 }

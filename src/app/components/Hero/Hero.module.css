@@ -1,0 +1,143 @@
+/* components/Hero/Hero.module.css */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-petroleo);
+}
+
+.heroVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.heroOverlay {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Overlay mais sutil para um look mais sofisticado */
+  background: rgba(var(--color-petroleo-rgb), 0.4);
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--color-branco);
+  padding: 0 20px;
+  max-width: 960px; /* Mais espaço para o texto respirar */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem; /* Espaçamento base entre elementos */
+}
+
+.heroTitle {
+  font-family: var(--font-titulo); /* Clash Display */
+  font-size: 6rem; /* Tamanho massivo para impacto */
+  font-weight: 600; /* SemiBold é o ideal para Clash Display */
+  color: var(--color-branco);
+  line-height: 1.05; /* Linhas bem próximas para um bloco denso */
+  margin: 0;
+  /* Estado inicial para animação é controlado via GSAP */
+}
+
+.heroSubtitle {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1.5rem;
+  font-weight: 400; /* Regular */
+  color: var(--color-branco);
+  max-width: 600px; /* Limita largura para melhor leitura */
+  line-height: 1.4;
+  margin: 0;
+  margin-top: -0.5rem; /* Ajuste fino de posicionamento */
+}
+
+.ctaButton {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-weight: 700; /* Bold */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-petroleo);
+  background-color: var(--color-dourado);
+  padding: 16px 32px;
+  border-radius: 12px; /* Cantos mais suaves e modernos */
+  border: 1px solid transparent; /* Para a transição */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-top: 1rem; /* Mais espaço acima do botão */
+}
+
+.ctaButton:hover {
+  background-color: transparent;
+  color: var(--color-dourado);
+  border-color: var(--color-dourado);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(var(--color-petroleo-rgb), 0.2);
+}
+
+.socialProof {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 0.9rem;
+  font-weight: 400; /* Light/Regular */
+  color: rgba(255, 255, 255, 0.8); /* Um pouco transparente */
+  letter-spacing: 0.03em;
+  margin-top: 1.5rem;
+}
+
+.socialProof .separator {
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.5); /* Separador mais sutil */
+}
+
+/* NOVO: Estilo e animação para o indicador de rolagem */
+.scrollIndicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  opacity: 0; /* Começa invisível, GSAP controla */
+  animation: bobbingAnimation 2s infinite ease-in-out;
+}
+
+@keyframes bobbingAnimation {
+  0% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 10px); }
+  100% { transform: translate(-50%, 0); }
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  .heroContent { gap: 1rem; }
+  .heroTitle { font-size: 3.5rem; }
+  .heroSubtitle { font-size: 1.2rem; }
+  .ctaButton { font-size: 0.9rem; padding: 14px 28px; }
+  .socialProof { font-size: 0.8rem; }
+  .socialProof .separator { display: none; } /* Esconde separadores */
+  .socialProof span { display: block; margin: 2px 0; } /* Empilha a prova social */
+}
+
+@media (max-width: 480px) {
+  .heroTitle { font-size: 2.8rem; }
+  .heroSubtitle { font-size: 1rem; }
+}

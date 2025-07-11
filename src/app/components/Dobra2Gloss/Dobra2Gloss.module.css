@@ -1,0 +1,170 @@
+/* components/Dobra2Gloss/Dobra2Gloss.module.css */
+
+.dobraSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Ocupa pelo menos a altura da viewport */
+  overflow: hidden; /* Esconde excessos do vídeo */
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  padding: 60px 20px; /* Padding interno */
+  /* Fallback background se o vídeo não carregar */
+  background-color: var(--color-petroleo);
+  color: var(--color-branco); /* Cor padrão do texto sobre o fundo escuro/vídeo (Branco) */
+}
+
+.sectionVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Ajuste a opacidade para garantir um bom contraste para o texto branco */
+  background: rgba(0, 0, 0, 0.6); /* Exemplo: 60% opacidade preta */
+  z-index: 1;
+}
+
+
+.contentContainer {
+  position: relative;
+  z-index: 2;
+  text-align: center; /* Centraliza o texto */
+  max-width: 900px; /* Aumentei a largura máxima */
+  width: 100%;
+
+  /* --- Estado Inicial para Animação CSS do Container --- */
+  opacity: 0;
+  transform: translateY(50px); /* Animação de entrada do container */
+  /* ---------------------------------------------------- */
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out; /* Transição suave */
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  /* --- Tamanho de fonte maior para impacto --- */
+  font-size: 5rem; /* Ajuste este tamanho para o impacto desejado */
+  /* ------------------------------------------- */
+  margin-bottom: 0.4em; /* Espaçamento menor */
+  color: var(--color-branco); /* Título em Branco */
+  font-weight: 700;
+  line-height: 1.1;
+
+  /* --- Estado Inicial para Animação CSS (opcional, pode usar stagger no container) --- */
+  /* opacity: 0; transform: translateY(30px); transition: opacity 1s ease-out, transform 1s ease-out; */
+  /* ---------------------------------------------------------------------------------- */
+}
+
+.sectionDescription {
+  font-family: 'Montserrat', sans-serif;
+  /* --- Tamanho de fonte maior --- */
+  font-size: 1.8rem; /* Ajuste este tamanho */
+  /* ------------------------------ */
+  margin-bottom: 2em; /* Espaçamento maior antes do CTA */
+  color: var(--color-branco); /* Descrição em Branco */
+  font-weight: 400;
+
+  /* --- Estado Inicial para Animação CSS (opcional) --- */
+  /* opacity: 0; transform: translateY(30px); transition: opacity 1s ease-out, transform 1s ease-out; */
+  /* ---------------------------------------------------------------------------------- */
+}
+
+/* Removidas as regras para .benefitsList e .benefitsList li */
+
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--color-dourado); /* Cor de fundo do botão Dourado */
+  color: var(--color-petroleo); /* Cor do texto Petróleo */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3rem; /* Tamanho maior para o botão */
+  font-weight: 700;
+  padding: 18px 35px; /* Padding maior */
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.1s ease, opacity 1.2s ease-out; /* Incluído opacity na transição */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+   /* --- Estado Inicial para Animação CSS --- */
+   opacity: 0;
+   transform: scale(0.95); /* Começa um pouco menor */
+  /* ----------------------------------------- */
+   /* A transição já está definida acima */
+}
+
+
+
+/* --- ESTADO FINAL (quando a seção está visível - classe adicionada pelo IntersectionObserver) --- */
+.dobraSection.isVisible .contentContainer {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animação com stagger nos filhos diretos do contentContainer quando .isVisible é aplicado no PARENTE */
+.dobraSection.isVisible .contentContainer > * {
+    opacity: 1; /* Torna os filhos visíveis */
+    transform: translateY(0); /* Retorna à posição original */
+}
+
+/* Adiciona um delay progressivo aos filhos diretos do contentContainer */
+/* Ajuste os valores de transition-delay conforme a quantidade de elementos (h2, p, a) */
+.dobraSection.isVisible .contentContainer h2 {
+    transition-delay: 0.3s; /* Título aparece primeiro */
+}
+
+.dobraSection.isVisible .contentContainer p {
+    transition-delay: 0.5s; /* Descrição aparece depois do título */
+}
+
+.dobraSection.isVisible .contentContainer a { /* O botão CTA */
+     /* Removemos a animação de scale/opacity do próprio botão para usar o stagger do container */
+     /* Se quiser animação de scale, defina no estado final aqui */
+     /* opacity: 1; */ /* Já setado pelo '> *' */
+     /* transform: scale(1); */ /* Já setado pelo '> *' */
+    transition-delay: 0.7s; /* CTA aparece por último */
+}
+
+
+/* ----------------------------------------------------------------------------------------- */
+
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 3.5rem; /* Ajuste para tablets */
+  }
+
+  .sectionDescription {
+    font-size: 1.5rem;
+  }
+
+  .ctaButton {
+    font-size: 1.1rem;
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+    .sectionTitle {
+        font-size: 2.8rem; /* Ajuste para mobile menor */
+    }
+    .sectionDescription {
+        font-size: 1.2rem;
+    }
+    .ctaButton {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+}

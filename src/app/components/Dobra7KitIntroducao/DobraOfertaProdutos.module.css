@@ -1,0 +1,846 @@
+/* components/Dobra7Kit/Dobra7Kit.module.css */
+
+.kitSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Ocupa pelo menos a altura da viewport */
+  overflow: hidden;
+  display: flex; /* Torna a seção um flex container */
+  flex-direction: row; /* Layout de 3 colunas horizontais */
+  align-items: stretch; /* Faz as colunas ocuparem a altura */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  padding: 0; /* Remove padding geral */
+  /* Fundo definido via inline style no JS (#f8f5f0) */
+  color: var(--color-petroleo); /* Cor padrão do texto */
+
+   /* --- Linhas Divisórias --- */
+  border-top: 1px solid rgba(var(--color-petroleo-rgb), 0.1);
+  border-bottom: 1px solid rgba(var(--color-petroleo-rgb), 0.1);
+  /* ------------------------- */
+}
+
+
+
+
+.imageSideLeft,
+.imageSideRight {
+  flex: 0 0 30%; /* Cada lado da imagem ocupa 30% */
+  width: 30%; /* Garante os 30% */
+  height: auto; /* Altura automática */
+  min-height: 100vh; /* Garante que ocupem a altura mínima da seção */
+  position: relative;
+  overflow: hidden;
+  background-size: cover; /* Cobre a área */
+  background-position: center; /* Centraliza a imagem */
+  background-repeat: no-repeat;
+   /* Remove padding, o conteúdo (se houver) terá padding */
+
+   /* --- Estado Inicial para Animação CSS --- */
+   opacity: 0;
+   /* Animação de slide sutil */
+   /* imageSideLeft: translateX(-50px); */
+   /* imageSideRight: translateX(50px); */
+   /* -------------------------------------- */
+   transition: opacity 1.5s ease-out; /* Transição suave para opacidade */
+   /* Adicione transform na transition se quiser slide */
+}
+
+/* Se quiser animação de slide, descomente e ajuste: */
+/* .imageSideLeft { transform: translateX(-50px); } */
+/* .imageSideRight { transform: translateX(50px); } */
+/* .kitSection.isVisible .imageSideLeft { transform: translateX(0); } */
+/* .kitSection.isVisible .imageSideRight { transform: translateX(0); } */
+/* Adicione 'transform' na transition do .imageSideLeft, .imageSideRight */
+
+
+.centerContent {
+  flex: 1; /* O centro ocupa o espaço restante (40%) */
+  width: 40%; /* Garante 40% */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Conteúdo central empilhado */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  padding: 60px 40px; /* Padding interno para o conteúdo central */
+  text-align: center; /* Centraliza texto */
+  overflow-y: auto; /* Permite scrollar o conteúdo central se ele exceder a altura */
+
+   /* --- Estado Inicial para Animação CSS do Conteúdo Central --- */
+   opacity: 0;
+   transform: translateY(50px);
+  /* --------------------------------------------------------- */
+   transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Transição suave */
+}
+
+.introContent {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 100%; /* Ocupa a largura total do centerContent */
+    width: 100%;
+
+    /* --- Estado Inicial para Animação CSS (opcional, stagger via filhos do centerContent) --- */
+    /* opacity: 0; transform: translateY(30px); */
+    /* transition: opacity 1s ease-out, transform 1s ease-out; */
+}
+
+.sectionTitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: var(--color-petroleo);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+}
+
+.sectionSubtitle {
+     font-family: 'Montserrat', sans-serif;
+     font-size: 1.1rem;
+     color: var(--color-petroleo);
+     margin-top: 0;
+     margin-bottom: 0;
+}
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 100%; /* Ocupa a largura total do centerContent */
+    width: 100%;
+}
+
+.kitCard {
+    background-color: var(--color-branco);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    /* --- Estado Inicial para Animação CSS (Animação individual dos cards) --- */
+    opacity: 0;
+    transform: translateY(30px);
+    /* --------------------------------------------------------------------- */
+     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.recommendedCard {
+     border: 2px solid var(--color-dourado);
+     box-shadow: 0 8px 25px rgba(207, 163, 79, 0.2); /* RGB for Dourado */
+     position: relative;
+     z-index: 1;
+}
+
+.recommendedTag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: var(--color-dourado);
+    color: var(--color-petroleo);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.cardHeader {
+    width: 100%;
+    height: 180px; /* Altura do header (ajuste) */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex; /* Para posicionar elementos dentro do header (preço antigo) */
+    justify-content: flex-end; /* Alinha para a direita */
+    padding: 10px; /* Padding interno */
+     position: relative; /* Para o preço antigo */
+}
+
+.oldPrice {
+    background-color: rgba(var(--color-petroleo-rgb), 0.8);
+    color: var(--color-branco);
+    font-size: 0.9rem;
+    text-decoration: line-through;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-weight: 500;
+     position: absolute; /* Posiciona absolutamente dentro do header */
+     top: 15px;
+     right: 15px;
+     z-index: 2; /* Garante que fique acima do background */
+}
+
+
+.cardContent {
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.cardTitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    color: var(--color-petroleo);
+}
+
+.cardBottles {
+     font-family: 'Montserrat', sans-serif;
+     font-size: 1.1rem;
+     font-weight: 600;
+     color: var(--color-dourado);
+     margin-bottom: 1em;
+}
+
+.cardInstallment {
+     font-family: 'Montserrat', sans-serif;
+     font-size: 0.9rem;
+     color: var(--color-petroleo);
+     margin-bottom: 0.3em;
+}
+
+.cardNewPrice {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-petroleo);
+    margin-bottom: 0.5em;
+    line-height: 1;
+}
+
+.cardNewPrice span { /* Número inteiro */
+    font-size: 1em; /* Tamanho normal */
+}
+
+.cardNewPrice sup { /* Centavos */
+     font-size: 0.6em; /* Tamanho menor */
+     top: -0.5em; /* Posiciona mais alto */
+}
+
+
+.cardTotalPrice {
+     font-family: 'Montserrat', sans-serif;
+     font-size: 0.9rem;
+     color: var(--color-petroleo);
+     margin-bottom: 1.5em;
+     font-weight: 500;
+}
+
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--color-petroleo);
+  color: var(--color-branco);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 25px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  margin-top: auto;
+}
+
+.ctaButton:hover {
+  background-color: var(--color-dourado);
+  color: var(--color-petroleo);
+  transform: scale(1.05);
+}
+
+.socialProofIcons {
+    font-size: 0.8rem;
+    color: var(--color-petroleo);
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.socialProofIcons span {
+    margin: 0 5px;
+    font-weight: 300;
+    white-space: nowrap;
+}
+
+
+/* --- ESTADO FINAL (quando a seção está visível) --- */
+.kitSection.isVisible .imageSideLeft,
+.kitSection.isVisible .imageSideRight {
+     opacity: 1;
+     /* Se quiser animação de slide, descomente: */
+     /* transform: translateX(0); */
+     transition-delay: 0.2s; /* Animação das imagens começa um pouco depois */
+}
+
+
+/* Animação do conteúdo central (intro e grid) */
+.kitSection.isVisible .centerContent {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s; /* Anima depois das imagens laterais */
+}
+
+/* Animação de stagger para os itens INDIVIDUAIS da grid */
+.kitSection.isVisible .kitCard {
+    opacity: 1;
+    transform: translateY(0);
+    /* transition-delay será aplicado aqui para o stagger */
+}
+
+/* Adiciona transition-delay para o stagger dos cards dentro da grid */
+/* Ajuste os valores e a quantidade de regras conforme o número de itens na grid */
+.kitSection.isVisible .kitCard:nth-child(1) { transition-delay: 0.7s; } /* Começa a animar depois do centerContent */
+.kitSection.isVisible .kitCard:nth-child(2) { transition-delay: 0.8s; }
+.kitSection.isVisible .kitCard:nth-child(3) { transition-delay: 0.9s; }
+.kitSection.isVisible .kitCard:nth-child(4) { transition-delay: 1s; }
+/* Adicione mais regras se tiver 5+ itens */
+
+
+/* --- Responsividade --- */
+@media (max-width: 900px) {
+  .kitSection {
+    flex-direction: column; /* Empilha as 3 colunas */
+    padding: 40px 0; /* Adiciona padding geral */
+    align-items: center;
+    min-height: auto; /* Altura automática no mobile */
+  }
+
+  .imageSideLeft,
+  .imageSideRight {
+      flex: auto; /* Ocupam o espaço necessário */
+      width: 100%; /* Ocupam a largura total */
+      min-height: 40vh; /* Altura mínima para cada imagem no mobile (ajuste) */
+      /* Reduzir o transform inicial se necessário */
+      /* transform: translateY(30px); */
+      opacity: 0; /* Estado inicial opaco para animação vertical */
+      transition: opacity 1s ease-out, transform 1s ease-out; /* Transição para mobile */
+  }
+
+   /* Ordem das colunas no mobile: Imagem Esquerda, Conteúdo Central, Imagem Direita */
+  .imageSideLeft { order: 1; }
+  .centerContent {
+      order: 2;
+      flex: auto;
+      width: 100%;
+      min-height: auto;
+      padding: 40px 20px; /* Padding interno no mobile */
+       /* Reduzir o transform inicial se necessário */
+      /* transform: translateY(30px); */
+      opacity: 0; /* Estado inicial opaco para animação */
+      transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+  }
+  .imageSideRight { order: 3; }
+
+
+  .introContent { margin-bottom: 40px; }
+  .sectionTitle { font-size: 2.3rem; }
+  .sectionSubtitle { font-size: 1rem; }
+
+  .cardsGrid {
+      gap: 20px;
+       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .cardHeader { height: 150px; }
+  .cardNewPrice { font-size: 3rem; }
+  .ctaButton { font-size: 0.9rem; padding: 10px 20px; }
+   .socialProofIcons span { margin: 0 3px; font-size: 0.75rem; }
+
+    /* --- ESTADO FINAL RESPONSIVO --- */
+    /* Animação de stagger VERTICAL para as 3 grandes seções (Imagens e Conteúdo Central) */
+    .kitSection.isVisible .imageSideLeft {
+        opacity: 1; transform: translateY(0); transition-delay: 0.2s;
+    }
+    .kitSection.isVisible .centerContent {
+        opacity: 1; transform: translateY(0); transition-delay: 0.4s;
+    }
+     .kitSection.isVisible .imageSideRight {
+        opacity: 1; transform: translateY(0); transition-delay: 0.6s;
+    }
+
+    /* Animação de stagger dos cards DENTRO do centerContent (após o centerContent animar) */
+     .kitSection.isVisible .kitCard:nth-child(1) { transition-delay: 0.8s; }
+     .kitSection.isVisible .kitCard:nth-child(2) { transition-delay: 0.9s; }
+     .kitSection.isVisible .kitCard:nth-child(3) { transition-delay: 1s; }
+     .kitSection.isVisible .kitCard:nth-child(4) { transition-delay: 1.1s; }
+}
+
+@media (max-width: 480px) {
+     .kitSection { padding: 40px 10px; }
+     .sectionTitle { font-size: 2rem; }
+     .sectionSubtitle { font-size: 0.9rem; }
+     .cardsGrid { grid-template-columns: 1fr; gap: 15px; }
+     .cardHeader { height: 120px; }
+     .cardNewPrice { font-size: 2.5rem; }
+     .ctaButton { font-si/* components/DobraOfertaProdutos/DobraOfertaProdutos.module.css */
+
+.ofertaProdutosSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Ocupa a altura mínima da viewport */
+  display: flex;
+  flex-direction: column; /* Conteúdo empilhado: Título, Produtos, Kit */
+  align-items: center; /* Centraliza conteúdo horizontalmente */
+  justify-content: center; /* Centraliza verticalmente (se houver espaço) */
+  padding: 80px 40px; /* Padding generoso superior, lateral e inferior */
+  background-color: var(--color-cinza-claro); /* Fundo cinza claro para destacar os cards */
+  color: var(--color-petroleo); /* Cor padrão do texto (Petróleo) */
+
+  /* --- Estado Inicial para Animação da Seção (Slide Up e Fade In) --- */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Transição suave */
+}
+
+/* --- ESTADO FINAL: Quando a seção está visível --- */
+.ofertaProdutosSection.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.introContent {
+  text-align: center;
+  margin-bottom: 60px; /* Espaço antes da grid de produtos */
+  max-width: 900px; /* Largura máxima para o texto introdutório */
+  width: 100%;
+  
+  /* --- Animação Stagger para Título/Subtítulo (aparecem depois da seção) --- */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s ease-out 0.3s, transform 1s ease-out 0.3s; /* Delay para aparecer depois da seção */
+}
+
+/* --- ESTADO FINAL: Título/Subtítulo visíveis --- */
+.ofertaProdutosSection.isVisible .introContent {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.sectionTitle {
+  font-family: var(--font-titulo); /* Clash Display */
+  font-size: 3.5rem; /* Aumentado para impacto */
+  font-weight: 700; /* Extra bold */
+  color: var(--color-petroleo);
+  margin-bottom: 0.5em;
+  letter-spacing: -0.04em; /* Mais denso */
+  line-height: 1.1;
+  text-transform: uppercase; /* Para máximo impacto visual */
+}
+
+.sectionSubtitle {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-petroleo);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais no desktop */
+  gap: 40px; /* Espaço entre os cards */
+  max-width: 1200px; /* Largura máxima para a grid */
+  width: 100%;
+  margin-bottom: 80px; /* Espaço antes do Kit */
+}
+
+.productCard {
+  background-color: var(--color-branco);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Sombra suave para o card */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição para hover */
+  
+  /* --- Estado Inicial para Animação Stagger dos Cards Individuais --- */
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.productCard:hover {
+  transform: translateY(-10px); /* Efeito de elevação no hover */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12); /* Sombra mais intensa no hover */
+}
+
+/* --- ESTADO FINAL: Animação Stagger para os productCards (aparecem em cascata) --- */
+.ofertaProdutosSection.isVisible .productCard:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease-out 0.5s, transform 1s ease-out 0.5s; /* Delay progressivo */
+}
+.ofertaProdutosSection.isVisible .productCard:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease-out 0.7s, transform 1s ease-out 0.7s;
+}
+.ofertaProdutosSection.isVisible .productCard:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease-out 0.9s, transform 1s ease-out 0.9s;
+}
+
+
+.productImageContainer {
+  width: 100%;
+  max-height: 200px; /* Altura fixa para as imagens dos produtos para alinhamento */
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productImage {
+  width: 100%; /* Faz a imagem ocupar a largura total do container */
+  height: auto;
+  object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+  max-height: 180px; /* Limita a altura da imagem dentro do container */
+}
+
+.productName {
+  font-family: var(--font-titulo); /* Clash Display */
+  font-size: 1.8rem; /* Aumentado */
+  font-weight: 600; /* SemiBold */
+  color: var(--color-petroleo);
+  margin-bottom: 0.8em;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.productDescription {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-petroleo);
+  line-height: 1.5;
+  margin-bottom: 2em;
+  flex-grow: 1; /* Faz a descrição ocupar o espaço restante, alinhando os CTAs */
+}
+
+.productCtaButton {
+  display: inline-block;
+  background-color: var(--color-dourado);
+  color: var(--color-petroleo);
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 25px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.productCtaButton:hover {
+  background-color: var(--color-petroleo);
+  color: var(--color-branco);
+  transform: scale(1.05);
+}
+
+.kitContainer {
+  width: 100%;
+  max-width: 800px; /* Largura máxima para o card do kit */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* --- Estado Inicial para Animação do Card do Kit --- */
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* --- ESTADO FINAL: Card do Kit visível (aparece por último) --- */
+.ofertaProdutosSection.isVisible .kitContainer {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1.2s ease-out 1.1s, transform 1.2s ease-out 1.1s; /* Delay maior para aparecer por último */
+}
+
+.kitCard {
+  background-color: var(--color-petroleo); /* Fundo Petróleo para destaque máximo */
+  color: var(--color-branco); /* Texto branco no kit */
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Sombra mais forte para o kit */
+  display: flex;
+  flex-direction: row; /* Imagem e conteúdo lado a lado no desktop */
+  overflow: hidden;
+  width: 100%; /* Ocupa a largura máxima do kitContainer */
+}
+
+.kitImageContainer {
+  flex: 0 0 50%; /* Metade da largura para a imagem */
+  height: 400px; /* Altura fixa para a imagem do kit (ajuste conforme a imagem) */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.kitImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cobre a área */
+  transition: transform 0.3s ease;
+}
+
+.kitImage:hover {
+  transform: scale(1.05); /* Zoom sutil na imagem do kit */
+}
+
+.kitContent {
+  flex: 1; /* Ocupa o restante do espaço */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.kitTitle {
+  font-family: var(--font-titulo); /* Clash Display */
+  font-size: 2.5rem; /* Tamanho grande para o título do kit */
+  font-weight: 700; /* Extra bold */
+  color: var(--color-dourado); /* Título do kit em dourado para destaque */
+  margin-bottom: 0.5em;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.kitItems {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-branco);
+  margin-bottom: 1.5em;
+}
+
+.kitOldPrice {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1.1rem;
+  text-decoration: line-through; /* Preço riscado */
+  color: rgba(255, 255, 255, 0.7); /* Branco suave para o preço antigo */
+  margin-bottom: 0.5em;
+  display: block; /* Garante que o texto fique em sua própria linha */
+}
+
+.kitInstallment {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--color-branco);
+  margin-bottom: 0.3em;
+}
+
+.kitNewPrice {
+  font-family: var(--font-titulo); /* Clash Display para o preço grande */
+  font-size: 4rem; /* Tamanho massivo para o preço do kit */
+  font-weight: 700; /* Extra bold */
+  color: var(--color-dourado); /* Preço do kit em dourado */
+  margin-bottom: 0.5em;
+  line-height: 1; /* Linha única */
+}
+
+.kitNewPrice span { /* Número inteiro */
+  font-size: 1em;
+}
+
+.kitNewPrice sup { /* Centavos */
+  font-size: 0.5em;
+  top: -0.5em;
+  color: var(--color-branco); /* Centavos em branco para contraste sutil */
+}
+
+.kitTotalPrice {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-branco);
+  margin-bottom: 2em;
+}
+
+.kitCtaButton {
+  display: inline-block;
+  background-color: var(--color-dourado);
+  color: var(--color-petroleo);
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 1.3rem; /* Botão maior e mais impactante */
+  font-weight: 700;
+  padding: 18px 35px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra para o botão */
+}
+
+.kitCtaButton:hover {
+  background-color: var(--color-branco); /* Botão branco no hover para mais destaque */
+  color: var(--color-petroleo);
+  transform: scale(1.05);
+}
+
+.socialProofIcons {
+  font-family: var(--font-corpo); /* Satoshi */
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8); /* Branco suave para os ícones */
+  margin-top: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Quebra linha se houver muitos */
+}
+
+.socialProofIcons span {
+  margin: 0 8px; /* Espaço entre os itens de prova social */
+  font-weight: 300;
+  white-space: nowrap; /* Impede quebras de linha dentro do span */
+}
+
+
+/* --- Responsividade --- */
+@media (max-width: 1024px) { /* Tablets maiores e desktops menores */
+  .ofertaProdutosSection {
+      padding: 60px 30px;
+  }
+  .sectionTitle {
+      font-size: 3rem;
+  }
+  .productsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Permite 2 ou 3 colunas, adapta */
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  .productName {
+      font-size: 1.6rem;
+  }
+  .kitCard {
+      flex-direction: column; /* Empilha imagem e conteúdo do kit */
+  }
+  .kitImageContainer {
+      width: 100%; /* Ocupa 100% da largura do card */
+      height: 300px; /* Ajusta altura da imagem do kit */
+  }
+  .kitContent {
+      text-align: center; /* Centraliza o texto do kit no mobile */
+      padding: 30px;
+  }
+   .kitTitle {
+       font-size: 2.2rem;
+   }
+   .kitNewPrice {
+       font-size: 3.5rem;
+   }
+   .kitCtaButton {
+       font-size: 1.2rem;
+       padding: 15px 30px;
+   }
+}
+
+@media (max-width: 768px) { /* Tablets menores e mobile */
+  .ofertaProdutosSection {
+    padding: 60px 20px;
+  }
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  .sectionSubtitle {
+    font-size: 1rem;
+  }
+  .productsGrid {
+    grid-template-columns: 1fr; /* Uma coluna no mobile (empilha os produtos) */
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  .productCard {
+    padding: 25px;
+  }
+  .productName {
+    font-size: 1.5rem;
+  }
+  .productDescription {
+    font-size: 0.95rem;
+  }
+  .productCtaButton {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+
+  .kitContainer {
+    max-width: 100%; /* Kit ocupa a largura total do container */
+  }
+  .kitImageContainer {
+    height: 250px;
+  }
+  .kitContent {
+      padding: 25px;
+  }
+  .kitTitle {
+      font-size: 2rem;
+  }
+  .kitItems {
+      font-size: 1.1rem;
+  }
+  .kitOldPrice, .kitInstallment, .kitTotalPrice {
+      font-size: 1rem;
+  }
+  .kitNewPrice {
+      font-size: 3rem;
+  }
+  .kitCtaButton {
+      font-size: 1.1rem;
+      padding: 15px 30px;
+  }
+  .socialProofIcons {
+      font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) { /* Mobile muito pequeno */
+  .ofertaProdutosSection {
+    padding: 40px 15px;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  .sectionSubtitle {
+    font-size: 0.9rem;
+  }
+  .productImageContainer {
+    max-height: 150px;
+  }
+  .productImage {
+    max-height: 120px;
+  }
+  .productName {
+    font-size: 1.4rem;
+  }
+  .productDescription {
+      font-size: 0.85rem;
+  }
+
+  .kitImageContainer {
+    height: 200px;
+  }
+  .kitTitle {
+    font-size: 1.8rem;
+  }
+  .kitNewPrice {
+    font-size: 2.5rem;
+  }
+  .kitCtaButton {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+   .socialProofIcons span {
+       margin: 0 5px; /* Reduz espaço */
+   }
+}ze: 0.8rem; padding: 8px 15px; }
+     .socialProofIcons span { margin: 0 2px; font-size: 0.7rem; }
+
+      .imageSideLeft, .imageSideRight { min-height: 30vh; }
+}

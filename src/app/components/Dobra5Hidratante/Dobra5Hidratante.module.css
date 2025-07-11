@@ -1,0 +1,154 @@
+/* components/Dobra5Hidratante/Dobra5Hidratante.module.css */
+
+.dobraSection {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Ocupa pelo menos a altura da viewport */
+  overflow: hidden; /* Esconde excessos do vídeo */
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  padding: 60px 20px; /* Padding interno */
+  /* Fallback background se o vídeo não carregar */
+  background-color: var(--color-petroleo);
+  color: var(--color-branco); /* Cor padrão do texto sobre o fundo escuro/vídeo */
+}
+
+.sectionVideo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover; /* Garante que o vídeo cubra a área sem distorção */
+  z-index: 0; /* Fica abaixo do conteúdo */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Ajuste a opacidade para garantir um bom contraste para o texto branco */
+  background: rgba(0, 0, 0, 0.5); /* Exemplo: 50% opacidade preta */
+  z-index: 1; /* Fica entre o vídeo e o conteúdo */
+}
+
+
+.contentContainer {
+  position: relative;
+  z-index: 2; /* Fica acima do vídeo e do overlay */
+  text-align: center; /* Centraliza o texto */
+  max-width: 900px; /* Largura máxima para o conteúdo */
+  width: 100%;
+
+  /* --- Estado Inicial para Animação CSS do Container --- */
+  opacity: 0;
+  transform: translateY(50px); /* Animação de entrada do container */
+  /* ---------------------------------------------------- */
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out; /* Transição suave */
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem; /* Tamanho grande para impacto (ajustado um pouco) */
+  margin-bottom: 0.5em; /* Espaçamento menor */
+  color: var(--color-dourado); /* Título em Dourado para destaque */
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.sectionDescription {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.6rem; /* Tamanho da descrição (ajustado um pouco) */
+  margin-bottom: 2em; /* Espaçamento maior antes do CTA */
+  color: var(--color-branco); /* Descrição em Branco */
+  font-weight: 400;
+}
+
+
+.ctaButton {
+  display: inline-block;
+  background-color: var(--color-dourado); /* Cor de fundo do botão Dourado */
+  color: var(--color-petroleo); /* Cor do texto Petróleo */
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2rem; /* Tamanho maior para o botão */
+  font-weight: 700;
+  padding: 18px 35px; /* Padding maior */
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.1s ease, opacity 1.2s ease-out; /* Incluído opacity na transição */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+   /* --- Estado Inicial para Animação CSS --- */
+   opacity: 0;
+   transform: scale(0.95);
+  /* ----------------------------------------- */
+}
+
+.ctaButton:hover {
+  background-color: darken(var(--color-dourado), 10%); /* Escurece um pouco */
+  transform: scale(1.05);
+}
+
+/* --- ESTADO FINAL (quando a seção está visível - classe adicionada pelo IntersectionObserver) --- */
+.dobraSection.isVisible .contentContainer {
+    opacity: 1;
+    transform: translateY(0);
+    /* Adiciona um pequeno delay para que o container comece a animar depois que a seção for detectada */
+    transition-delay: 0.2s;
+}
+
+/* Animação com stagger nos filhos diretos do contentContainer (h2, p, a) */
+.dobraSection.isVisible .contentContainer > * {
+    opacity: 1; /* Torna os filhos visíveis */
+    transform: translateY(0); /* Retorna à posição original */
+    transition: opacity 1s ease-out, transform 1s ease-out; /* Transição para os filhos */
+}
+
+/* Adiciona um delay progressivo aos filhos diretos do contentContainer */
+/* Ajuste os valores de transition-delay conforme a quantidade de elementos (h2, p, a) */
+.dobraSection.isVisible .contentContainer h2 {
+    transition-delay: 0.5s; /* Título aparece */
+}
+
+.dobraSection.isVisible .contentContainer p {
+    transition-delay: 0.7s; /* Descrição aparece depois do título */
+}
+
+.dobraSection.isVisible .contentContainer a { /* O botão CTA */
+    transition-delay: 0.9s; /* CTA aparece por último */
+}
+
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 3rem; /* Ajuste para tablets */
+  }
+
+  .sectionDescription {
+    font-size: 1.4rem;
+  }
+
+  .ctaButton {
+    font-size: 1.1rem;
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+    .sectionTitle {
+        font-size: 2.5rem; /* Ajuste para mobile menor */
+    }
+    .sectionDescription {
+        font-size: 1.2rem;
+    }
+    .ctaButton {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+}
