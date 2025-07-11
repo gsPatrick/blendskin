@@ -57,7 +57,7 @@ export default function DobraDuoEssencial() {
     // Link pode apontar para a seção de kits/ofertas da página
     const finalCtaLink = "#ofertas"; // Exemplo: link para uma seção de ofertas
 
-    const videoSrc = "/video/espuma.mp4";
+    const videoSrc = "/video/espuma.webm";
 
     return (
         <section ref={sectionRef} className={`${styles.dobraSection} scroll-section`}>
