@@ -1,115 +1,110 @@
-// app/components/DobraDuoEssencial/DobraDuoEssencial.js
-"use client";
+  // app/components/DobraVideoBBSkin/DobraVideoBBSkin.js
+  "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import styles from './DobraDuoEssencial.module.css';
+  import React, { useRef, useLayoutEffect } from 'react';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
-export default function DobraDuoEssencial() {
-    const [openAccordion, setOpenAccordion] = useState(0);
+  import styles from './DobraVideoBBSkin.module.css';
+
+  // Registrar o ScrollTrigger (apenas uma vez)
+  if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+
+  export default function DobraVideoBBSkin() {
     const sectionRef = useRef(null);
+    const videoRef = useRef(null);
+    const contentRef = useRef(null);
+    const titleRef = useRef(null);
+    const subtitleRef = useRef(null);
+    const ctaRef = useRef(null);
 
-    const handleAccordionClick = (index) => {
-        setOpenAccordion(openAccordion === index ? null : index);
-    };
+    // Animações de entrada e parallax, idênticas à Hero
+    useLayoutEffect(() => {
+      const ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          defaults: { duration: 1.2, ease: "power3.out" }
+        });
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add(styles.isVisible);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.25 }
-        );
+        // Animação de entrada do conteúdo
+        tl.fromTo(videoRef.current, { scale: 1.15 }, { scale: 1, duration: 2.5 })
+          .fromTo([titleRef.current, subtitleRef.current], { opacity: 0, y: 40 }, { opacity: 1, y: 0, stagger: 0.2 }, "-=1.5")
+          .fromTo(ctaRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0 }, "-=0.8");
 
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
+        // Efeito Parallax no Scroll
+        gsap.to(contentRef.current, {
+          yPercent: -15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          }
+        });
 
-        return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
-            }
-        };
+        gsap.to(videoRef.current, {
+          yPercent: 5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          }
+        });
+
+      }, sectionRef);
+
+      return () => ctx.revert();
     }, []);
 
-    const title = "O Duo Essencial: Limpeza e Luminosidade.";
-    const description = "Prepare sua pele com a limpeza suave da nossa espuma e revele um brilho incomparável com o poder antioxidante do nosso sérum de Vitamina C.";
+    // Conteúdo específico para o BB Skin Blur
+    const title = "Proteção. Cobertura. Efeito Blur.";
+    const description = "Simplifique sua rotina. Nosso BB Cream multifuncional oferece alta proteção solar, cobertura natural e um incrível efeito blur que disfarça poros e imperfeições instantaneamente.";
+    const ctaLink = "https://wa.me/5562984077070?text=Quero%20o%20BB%20Skin%20Blur%20com%20efeito%20blur!";
+    const ctaText = "QUERO O EFEITO BLUR AGORA";
 
-    const accordionItems = [
-        {
-            title: "Espuma de Limpeza Facial",
-            content: "Remove impurezas e oleosidade sem ressecar. Com Niacinamida e Camomila, controla o brilho, reduz poros e acalma a pele, sendo ideal para peles sensíveis e acneicas."
-        },
-        {
-            title: "Sérum Vitamina C 10%",
-            content: "Fórmula leve e oil-free que clareia manchas e uniformiza o tom da pele. Enriquecido com Ácido Hialurônico e Ferúlico, hidrata e protege contra os sinais do tempo."
-        },
-        {
-            title: "Modo de Uso Combinado",
-            content: "Pela manhã, comece com a Espuma de Limpeza. Com a pele seca, aplique 1 pump do Sérum Vitamina C. Finalize com seu protetor solar. Repita a limpeza à noite."
-        }
-    ];
-
-    // Link pode apontar para a seção de kits/ofertas da página
-    const finalCtaLink = "#ofertas"; // Exemplo: link para uma seção de ofertas
-
-    // **VERIFIQUE ESTE CAMINHO E NOME DO ARQUIVO DO VÍDEO E AGORA DO POSTER!**
-    const videoSrc = "/video/espuma.mp4";
-    const posterSrc = "/images/espuma-duo-poster.jpg"; // <<-- Adicione um caminho para o poster!
-
+    // **VERIFIQUE O CAMINHO E NOME DO VÍDEO E DO POSTER!**
+    const videoSrc = "/video/bbskin.mp4";
+    const posterSrc = "/images/bbskin-poster.jpg"; // Crie um poster para carregamento rápido
 
     return (
-        <section ref={sectionRef} className={`${styles.dobraSection} scroll-section`}>
-            {/* Lado Esquerdo: Conteúdo Redesenhado */}
-            <div className={styles.textSide}>
-                <h2 className={styles.sectionTitle}>{title}</h2>
-                <p className={styles.sectionDescription}>{description}</p>
+      <section ref={sectionRef} id="bbskin-video" className={`${styles.videoSection} scroll-section`}>
+        <video
+          ref={videoRef}
+          className={styles.videoBackground}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={posterSrc}
+        >
+          <source src={videoSrc} type="video/mp4" />
+          Seu navegador não suporta a tag de vídeo.
+        </video>
 
-                <div className={styles.accordion}>
-                    {accordionItems.map((item, index) => (
-                        <div key={index} className={styles.accordionItem}>
-                            <button
-                                // Adiciona a classe 'isOpen' ao header também para estilização
-                                className={`${styles.accordionHeader} ${openAccordion === index ? styles.isOpen : ''}`}
-                                onClick={() => handleAccordionClick(index)}
-                                aria-expanded={openAccordion === index}
-                            >
-                                {item.title}
-                                <span className={`${styles.accordionIcon} ${openAccordion === index ? styles.isOpen : ''}`}></span>
-                            </button>
-                            <div className={`${styles.accordionContent} ${openAccordion === index ? styles.isOpen : ''}`}>
-                                <div className={styles.accordionContentInner}>
-                                    {item.content}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+        <div className={styles.videoOverlay}></div>
 
-                {/* Botão removido e substituído por este link sutil */}
-                <a href={finalCtaLink} className={styles.finalCtaLink}>
-                    Descubra a rotina completa
-                    <span>→</span>
-                </a>
-            </div>
+        <div ref={contentRef} className={styles.videoContent}>
+          <h2 ref={titleRef} className={styles.videoTitle}>
+            {title}
+          </h2>
+          <p ref={subtitleRef} className={styles.videoSubtitle}>
+            {description}
+          </p>
 
-            {/* Lado Direito: Vídeo */}
-            <div className={styles.videoSide}>
-                <video
-                    className={styles.productVideo}
-                    src={videoSrc}
-                    autoPlay
-                    loop
-                    muted // <<< CONFIRMADO: Muted está presente
-                    playsInline // <<< CONFIRMADO: PlaysInline está presente
-                    poster={posterSrc} // <<< ADICIONADO o atributo poster! Crie a imagem!
-                    aria-label="Vídeo de demonstração da Espuma de Limpeza e Sérum BlendSkin"
-                />
-            </div>
-        </section>
+          <a
+            ref={ctaRef}
+            href={ctaLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaButton}
+          >
+            {ctaText}
+          </a>
+        </div>
+      </section>
     );
-}
+  }

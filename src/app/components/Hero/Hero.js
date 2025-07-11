@@ -5,6 +5,8 @@ import React, { useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
+import styles from './Hero.module.css';
+
 // Registrar o ScrollTrigger (apenas uma vez)
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -89,7 +91,7 @@ export default function Hero() {
         playsInline
         poster="/images/hero-poster.jpg" // Poster é importante para o carregamento
       >
-        <source src="/video/blendskin-hero-video.mp4" type="video/mp4" />
+        <source src="/video/blendskin-hero-video (3).webm" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
       </video>
 
