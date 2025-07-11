@@ -91,7 +91,7 @@ export default function Hero() {
         playsInline
         poster="/images/hero-poster.jpg" // Poster é importante para o carregamento
       >
-        <source src="/video/blendskin-hero-video.webm" type="video/mp4" />
+        <source src="/video/blendskin-hero-video2 (1).webm" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
       </video>
 
