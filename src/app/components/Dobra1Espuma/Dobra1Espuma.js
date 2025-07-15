@@ -59,8 +59,6 @@ export default function DobraRotinaCompleta() {
 
     return (
         <section ref={sectionRef} className={`${styles.dobraSection} scroll-section`}>
-            {/* --- MUDANÇA DE ORDEM AQUI --- */}
-
             {/* Lado Esquerdo: Imagem */}
             <div className={styles.mediaSide}>
                 <img
@@ -96,10 +94,11 @@ export default function DobraRotinaCompleta() {
                     ))}
                 </div>
 
-                <a href={finalCtaLink} target="_blank" rel="noopener noreferrer" className={styles.finalCtaLink}>
-                    Quero a rotina completa
-                    <span>→</span>
+                {/* --- MUDANÇA: Link transformado em botão --- */}
+                <a href={finalCtaLink} target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
+                    QUERO A ROTINA COMPLETA
                 </a>
+                {/* --- FIM DA MUDANÇA --- */}
             </div>
         </section>
     );

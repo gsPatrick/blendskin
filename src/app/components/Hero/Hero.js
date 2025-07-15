@@ -1,4 +1,4 @@
-// components/Hero/Hero.js
+// app/components/Hero/Hero.js (Código Corrigido)
 "use client";
 
 import React, { useRef, useLayoutEffect } from 'react';
@@ -89,9 +89,12 @@ export default function Hero() {
         loop
         muted
         playsInline
-        poster="/images/hero-poster.jpg" // Poster é importante para o carregamento
+        poster="/images/hero-poster.jpg"
       >
-        <source src="/video/blendskin-hero-video2 (1).webm" type="video/mp4" />
+        {/* --- ALTERAÇÃO AQUI --- */}
+        <source src="/video/heronovodois.mpm" type="video/webm" />
+        <source src="/video/heronovo.mp4" type="video/mp4" />
+        {/* --- FIM DA ALTERAÇÃO --- */}
         Seu navegador não suporta a tag de vídeo.
       </video>
 

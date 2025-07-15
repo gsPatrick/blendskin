@@ -54,9 +54,7 @@ export default function DobraDuoEssencial() {
         }
     ];
     
-    // Link pode apontar para a seção de kits/ofertas da página
-    const finalCtaLink = "#ofertas"; // Exemplo: link para uma seção de ofertas
-
+    const finalCtaLink = "#ofertas";
     const videoSrc = "/video/espuma.webm";
 
     return (
@@ -70,7 +68,6 @@ export default function DobraDuoEssencial() {
                     {accordionItems.map((item, index) => (
                         <div key={index} className={styles.accordionItem}>
                             <button
-                                // Adiciona a classe 'isOpen' ao header também para estilização
                                 className={`${styles.accordionHeader} ${openAccordion === index ? styles.isOpen : ''}`}
                                 onClick={() => handleAccordionClick(index)}
                                 aria-expanded={openAccordion === index}
@@ -87,24 +84,26 @@ export default function DobraDuoEssencial() {
                     ))}
                 </div>
 
-                {/* Botão removido e substituído por este link sutil */}
-                <a href={finalCtaLink} className={styles.finalCtaLink}>
-                    Descubra a rotina completa
-                    <span>→</span>
+                {/* --- MUDANÇA: Link transformado em botão --- */}
+                <a href={finalCtaLink} className={styles.ctaButton}>
+                    DESCUBRA A ROTINA COMPLETA
                 </a>
+                {/* --- FIM DA MUDANÇA --- */}
             </div>
 
             {/* Lado Direito: Vídeo */}
             <div className={styles.videoSide}>
                 <video
                     className={styles.productVideo}
-                    src={videoSrc}
                     autoPlay
                     loop
                     muted
                     playsInline
                     aria-label="Vídeo de demonstração da Espuma de Limpeza e Sérum BlendSkin"
-                />
+                >
+                    <source src="/video/espuma.webm" type="video/webm" />
+                    <source src="/video/espuma.mp4" type="video/mp4" />
+                </video>
             </div>
         </section>
     );

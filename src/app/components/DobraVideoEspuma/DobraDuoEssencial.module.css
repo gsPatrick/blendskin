@@ -149,31 +149,34 @@
     line-height: 1.6;
 }
 
-/* --- NOVO LINK DE AÇÃO SUTIL --- */
-.finalCtaLink {
+/* --- MUDANÇA: Estilo de botão aplicado aqui --- */
+.ctaButton {
+    display: inline-block;
     font-family: var(--font-corpo);
-    font-size: 1rem;
     font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--color-petroleo);
+    background-color: var(--color-dourado);
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
     margin-top: 2.5em;
-    display: inline-flex;
-    align-items: center;
-    transition: color 0.3s ease;
+    border: 1px solid transparent;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    align-self: flex-start; /* Alinha o botão ao início no container flex */
 }
 
-.finalCtaLink:hover {
+.ctaButton:hover {
+    background-color: var(--color-petroleo);
     color: var(--color-dourado);
-    text-decoration: underline;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
-
-.finalCtaLink span {
-    margin-left: 0.5em;
-    transition: transform 0.3s ease;
-}
-
-.finalCtaLink:hover span {
-    transform: translateX(5px);
-}
+/* --- FIM DA MUDANÇA --- */
 
 /* --- Responsividade --- */
 @media (max-width: 1024px) {
@@ -197,6 +200,10 @@
         align-items: center;
     }
     
+    .ctaButton {
+        align-self: center; /* Centraliza o botão no mobile */
+    }
+
     .sectionTitle::before { left: 50%; transform: translateX(-50%); }
 
     .videoSide {

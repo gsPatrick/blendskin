@@ -82,12 +82,12 @@ export default function DobraOfertaProdutos() {
   
   // (Cole aqui os dados de kitProduct e products da versão anterior para manter o código limpo)
   const kitProductData = {
-    id: 'kit-essencial', title: "KIT BLENDSKIN: Sua Rotina Completa", items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur", image: 'https://placehold.co/800x800/f8f5f0/193355?text=Kit+BlendSkin', oldPrice: "De R$ 541,00", installmentValue: '39,70', installments: '12x de', totalPrice: 'Ou R$ 397,00 à Vista', ctaLink: 'https://wa.me/5562984077070?text=Quero%20comprar%20o%20Kit%20Completo%20BlendSkin!', ctaText: 'QUERO O KIT COMPLETO',
+    id: 'kit-essencial', title: "KIT BLENDSKIN: Sua Rotina Completa", items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur", image: '/images/blendskin-espuma.jpg', oldPrice: "De R$ 541,00", installmentValue: '39,70', installments: '12x de', totalPrice: 'Ou R$ 397,00 à Vista', ctaLink: 'https://wa.me/5562984077070?text=Quero%20comprar%20o%20Kit%20Completo%20BlendSkin!', ctaText: 'QUERO O KIT COMPLETO',
   };
   const productsData = [
-    { id: 'espuma', name: 'Espuma de Limpeza Facial', image: 'https://placehold.co/400x500/f8f5f0/193355?text=Espuma', totalPrice: 'R$ 147,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20na%20Espuma%20de%20Limpeza', ctaText: 'COMPRAR AGORA' },
-    { id: 'serum', name: 'Sérum Vitamina C 10%', image: 'https://placehold.co/400x500/f8f5f0/193355?text=S%C3%A9rum', totalPrice: 'R$ 247,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20no%20S%C3%A9rum%20Vitamina%20C', ctaText: 'COMPRAR AGORA' },
-    { id: 'bbskin', name: 'BB Skin Blur FPS 60', image: 'https://placehold.co/400x500/f8f5f0/193355?text=BB+Skin', totalPrice: 'R$ 147,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20no%20BB%20Skin%20Blur', ctaText: 'COMPRAR AGORA' },
+    { id: 'espuma', name: 'Espuma de Limpeza Facial', image: '/produtos/1.png', ctaText: 'COMPRAR AGORA' },
+    { id: 'serum', name: 'Sérum Vitamina C 10%', image: '/produtos/3.png', totalPrice: 'R$ 247,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20no%20S%C3%A9rum%20Vitamina%20C', ctaText: 'COMPRAR AGORA' },
+    { id: 'bbskin', name: 'BB Skin Blur FPS 60', image: '/produtos/2.png', totalPrice: 'R$ 147,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20no%20BB%20Skin%20Blur', ctaText: 'COMPRAR AGORA' },
   ];
 
   return (

@@ -56,8 +56,6 @@ export default function DobraBBSkinDetalhes() {
     ];
     
     const finalCtaLink = "https://wa.me/5562984077070?text=Quero%20o%20BB%20Skin%20Blur%20com%20efeito%20blur!";
-
-    // **VERIFIQUE O CAMINHO E NOME DA IMAGEM!**
     const imageSrc = "/images/bbskin-detalhes.jpg"; 
 
     return (
@@ -97,10 +95,11 @@ export default function DobraBBSkinDetalhes() {
                     ))}
                 </div>
 
-                <a href={finalCtaLink} target="_blank" rel="noopener noreferrer" className={styles.finalCtaLink}>
-                    Peça o seu pelo WhatsApp
-                    <span>→</span>
+                {/* --- MUDANÇA: Link transformado em botão --- */}
+                <a href={finalCtaLink} target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
+                    PEÇA O SEU AGORA
                 </a>
+                {/* --- FIM DA MUDANÇA --- */}
             </div>
         </section>
     );

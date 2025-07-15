@@ -13,6 +13,7 @@ import DobraOfertaProdutos from "./components/DobraOfertaProdutos/DobraOfertaPro
 import DobraVideoEspuma from "./components/DobraVideoEspuma/DobraVideoEspuma";
 import DobraVideoBBSkin from "./components/DobraVideoBBSkin/DobraVideoBBSkin"; // <<-- Importe aqui
 import DobraBBSkinDetalhes from "./components/DobraBBSkinDetalhes/DobraBBSkinDetalhes"; // <<-- Importe aqui
+import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton'; // Importação do botão WhatsApp
 
 
 
@@ -22,6 +23,8 @@ import DobraBBSkinDetalhes from "./components/DobraBBSkinDetalhes/DobraBBSkinDet
 export default function Home() {
   return (
     <div className="scroll-container">
+            <WhatsAppButton />
+
       <Hero />
       <Dobra1Espuma />
             <DobraVideoEspuma /> {/* <<-- Adicionado aqui */}
