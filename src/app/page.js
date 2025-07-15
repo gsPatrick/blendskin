@@ -1,5 +1,5 @@
 // app/page.js
-import Hero from "./components/Hero/Hero";
+import Hero from "./components/Hero/hero";
 import Dobra1Espuma from "./components/Dobra1Espuma/Dobra1Espuma"; // Importe a nova dobra
 import Dobra2Gloss from "./components/Dobra2Gloss/Dobra2Gloss"; // Importe a nova dobra
 import DobraInterstitialCiencia from "./components/DobraInterstitialCiencia/DobraInterstitialCiencia";
