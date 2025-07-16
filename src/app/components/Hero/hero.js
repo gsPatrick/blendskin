@@ -92,7 +92,7 @@ export default function Hero() {
         poster="/images/hero-poster.jpg"
       >
         {/* --- ALTERAÇÃO AQUI --- */}
-        <source src="/video/heronovodois.mpm" type="video/webm" />
+        <source src="/video/heronovodois.webm" type="video/webm" />
         <source src="/video/heronovo.mp4" type="video/mp4" />
         {/* --- FIM DA ALTERAÇÃO --- */}
         Seu navegador não suporta a tag de vídeo.
