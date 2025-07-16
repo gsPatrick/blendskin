@@ -28,7 +28,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 80px 100px;
-    overflow-y: auto;
+    overflow-y: hidden; /* ALTERAÇÃO: Remove a barra de rolagem vertical */
     background-color: #EAE0D1; /* Mesmo bege sofisticado */
 
     /* Animação vindo da direita */

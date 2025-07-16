@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 80px 100px; /* Mais respiro */
-    overflow-y: auto;
+    overflow-y: hidden; /* ALTERAÇÃO: Remove a barra de rolagem vertical */
     
     /* --- NOVA COR DE FUNDO --- */
     background-color: #EAE0D1; /* Bege quente e sofisticado */
