@@ -82,7 +82,7 @@ export default function DobraOfertaProdutos() {
   
   // (Cole aqui os dados de kitProduct e products da versão anterior para manter o código limpo)
   const kitProductData = {
-    id: 'kit-essencial', title: "KIT BLENDSKIN: Sua Rotina Completa", items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur", image: '/images/blendskin-espuma.jpg', oldPrice: "De R$ 541,00", installmentValue: '39,70', installments: '12x de', totalPrice: 'Ou R$ 397,00 à Vista', ctaLink: 'https://wa.me/5562984077070?text=Quero%20comprar%20o%20Kit%20Completo%20BlendSkin!', ctaText: 'QUERO O KIT COMPLETO',
+    id: 'kit-essencial', title: "KIT BLENDSKIN: Sua Rotina Completa", items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur", image: '/images/blendskin-espuma.webp', oldPrice: "De R$ 541,00", installmentValue: '39,70', installments: '12x de', totalPrice: 'Ou R$ 397,00 à Vista', ctaLink: 'https://wa.me/5562984077070?text=Quero%20comprar%20o%20Kit%20Completo%20BlendSkin!', ctaText: 'QUERO O KIT COMPLETO',
   };
   const productsData = [
     { id: 'espuma', name: 'Espuma de Limpeza Facial', image: '/produtos/1.png', ctaText: 'COMPRAR AGORA' },

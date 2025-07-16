@@ -56,7 +56,7 @@ export default function DobraBBSkinDetalhes() {
     ];
     
     const finalCtaLink = "https://wa.me/5562984077070?text=Quero%20o%20BB%20Skin%20Blur%20com%20efeito%20blur!";
-    const imageSrc = "/images/bbskin-detalhes.jpg"; 
+    const imageSrc = "/images/bbskin-detalhes.webp"; 
 
     return (
         <section ref={sectionRef} className={`${styles.dobraSection} scroll-section`}>

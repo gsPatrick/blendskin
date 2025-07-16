@@ -1,4 +1,4 @@
-// app/components/Hero/Hero.js (Código Corrigido)
+// components/Hero/Hero.js
 "use client";
 
 import React, { useRef, useLayoutEffect } from 'react';
@@ -88,13 +88,14 @@ export default function Hero() {
         autoPlay
         loop
         muted
-        playsInline
-        poster="/images/hero-poster.jpg"
+        playsInline // Atributo essencial para iOS
+        poster="/images/hero-poster.jpg" // Poster é importante para o carregamento
       >
-        {/* --- ALTERAÇÃO AQUI --- */}
-        <source src="/video/heronovodois.webm" type="video/webm" />
+        {/* MODIFICAÇÃO PRINCIPAL ABAIXO */}
+        {/* 1. Adicionado source .mp4 para máxima compatibilidade (especialmente iPhones) */}
+        {/* 2. Corrigido o tipo do .webm */}
+        <source src="/video/heronovo.webm" type="video/webm" />
         <source src="/video/heronovo.mp4" type="video/mp4" />
-        {/* --- FIM DA ALTERAÇÃO --- */}
         Seu navegador não suporta a tag de vídeo.
       </video>
 

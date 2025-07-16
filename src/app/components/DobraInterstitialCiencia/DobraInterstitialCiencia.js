@@ -35,7 +35,7 @@ export default function DobraInterstitialCiencia() {
 
   // Conteúdo baseado na imagem de referência
   // **VERIFIQUE ESTE CAMINHO E NOME DO ARQUIVO!**
-  const imageSrc = "/images/nova.jpg"; // Use a imagem de aplicação do sérum
+  const imageSrc = "/images/nova.webp"; // Use a imagem de aplicação do sérum
   // Frase impactante - use spans para controlar a cor
   const impactPhraseParts = [
       "O mais",

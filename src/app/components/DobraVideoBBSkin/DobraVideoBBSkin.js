@@ -68,7 +68,7 @@
 
     // **VERIFIQUE O CAMINHO E NOME DO VÍDEO E DO POSTER!**
     const videoSrc = "/video/bbskin.mp4";
-    const posterSrc = "/images/bbskin-poster.jpg"; // Crie um poster para carregamento rápido
+    const posterSrc = "/images/bbskin-poster.webp"; // Crie um poster para carregamento rápido
 
     return (
       <section ref={sectionRef} id="bbskin-video" className={`${styles.videoSection} scroll-section`}>
