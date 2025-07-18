@@ -38,12 +38,12 @@ export default function DobraBBSkinDetalhes() {
 
     // Conteúdo específico para o BB Skin Blur
     const title = "A Perfeição em Um Único Passo.";
-    const description = "Nosso BB Cream multifuncional oferece alta proteção solar, cobertura natural e um incrível efeito blur, disfarçando poros e imperfeições instantaneamente.";
+    const description = "Nosso BB Skin multifuncional oferece alta proteção solar, cobertura natural e um incrível efeito blur, disfarçando poros e imperfeições instantaneamente.";
     
     const accordionItems = [
         {
             title: "Por que escolher o BB Skin Blur?",
-            content: "FPS 60 com alta proteção UVA/UVB. Toque seco oil-free, ideal para peles mistas e oleosas. Cor adaptável que se ajusta ao seu tom de pele. Substitui protetor, base e primer."
+            content: "FPS 50 com alta proteção UVA/UVB. Toque seco oil-free, ideal para peles mistas e oleosas. Cor adaptável que se ajusta ao seu tom de pele. Substitui protetor, base e primer."
         },
         {
             title: "Sinta a Diferença",

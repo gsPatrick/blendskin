@@ -36,12 +36,12 @@ export default function DobraGaleriaProdutos() {
   // --- MUDANÇA AQUI: Frases de impacto corretas para cada produto ---
   const galleryItems = [
     {
-      image: "/images/esmpuma2.webp", // Imagem da Espuma
-      impactPhrase: "LIMPEZA PROFUNDA.\nPELE RENOVADA."
-    },
-    {
       image: "/images/serum2.webp", // Imagem do Sérum
       impactPhrase: "LUMINOSIDADE E PODER.\nPELE RADIANTE."
+    },
+    {
+      image: "/images/blendskin.jpg", // Imagem da Espuma
+      impactPhrase: "LIMPEZA PROFUNDA.\nPELE RENOVADA."
     },
     {
       image: "/images/bbskin.webp", // Imagem do BB Skin

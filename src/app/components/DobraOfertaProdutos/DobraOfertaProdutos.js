@@ -87,7 +87,7 @@ export default function DobraOfertaProdutos() {
   const productsData = [
     { id: 'espuma', name: 'Espuma de Limpeza Facial', image: '/produtos/1.png', ctaText: 'COMPRAR AGORA' },
     { id: 'serum', name: 'Sérum Vitamina C 10%', image: '/produtos/3.png', totalPrice: 'R$ 247,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20no%20S%C3%A9rum%20Vitamina%20C', ctaText: 'COMPRAR AGORA' },
-    { id: 'bbskin', name: 'BB Skin Blur FPS 60', image: '/produtos/2.png', totalPrice: 'R$ 147,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20no%20BB%20Skin%20Blur', ctaText: 'COMPRAR AGORA' },
+    { id: 'bbskin', name: 'BB Skin Blur FPS 50', image: '/produtos/2.png', totalPrice: 'R$ 147,00', ctaLink: 'https://wa.me/5562984077070?text=Tenho%20interesse%20no%20BB%20Skin%20Blur', ctaText: 'COMPRAR AGORA' },
   ];
 
   return (

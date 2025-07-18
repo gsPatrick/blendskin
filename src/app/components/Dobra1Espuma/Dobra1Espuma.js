@@ -49,7 +49,7 @@ export default function DobraRotinaCompleta() {
             content: "Ação antioxidante que clareia manchas, uniformiza o tom e desperta a luminosidade natural da sua pele, deixando-a visivelmente mais radiante."
         },
         {
-            title: "Passo 3: BB Skin Blur FPS 60",
+            title: "Passo 3: BB Skin Blur FPS 50",
             content: "Finalização perfeita com alta proteção solar, cobertura leve e efeito blur, que disfarça poros e imperfeições para um acabamento impecável."
         }
     ];

@@ -62,7 +62,7 @@
 
     // Conteúdo específico para o BB Skin Blur
     const title = "Proteção. Cobertura. Efeito Blur.";
-    const description = "Simplifique sua rotina. Nosso BB Cream multifuncional oferece alta proteção solar, cobertura natural e um incrível efeito blur que disfarça poros e imperfeições instantaneamente.";
+    const description = "Simplifique sua rotina. Nosso BB Skin multifuncional oferece alta proteção solar, cobertura natural e um incrível efeito blur que disfarça poros e imperfeições instantaneamente.";
     const ctaLink = "https://wa.me/5562984077070?text=Quero%20o%20BB%20Skin%20Blur%20com%20efeito%20blur!";
     const ctaText = "QUERO O EFEITO BLUR AGORA";
 
