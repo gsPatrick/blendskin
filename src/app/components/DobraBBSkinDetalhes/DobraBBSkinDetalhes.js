@@ -12,6 +12,19 @@ export default function DobraBBSkinDetalhes() {
         setOpenAccordion(openAccordion === index ? null : index);
     };
 
+    // --- MUDANÇA: Função para rolagem suave ---
+    const handleScrollToOfertas = (event) => {
+        event.preventDefault(); // Impede o salto do link
+        const targetElement = document.querySelector('#ofertas');
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+    // --- FIM DA MUDANÇA ---
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -55,8 +68,8 @@ export default function DobraBBSkinDetalhes() {
         }
     ];
     
- const finalCtaLink = "#ofertas";
-     const imageSrc = "/images/bbskin-detalhes.webp"; 
+    const finalCtaLink = "#ofertas";
+    const imageSrc = "/images/bbskin-detalhes.webp"; 
 
     return (
         <section ref={sectionRef} className={`${styles.dobraSection} scroll-section`}>
@@ -95,8 +108,8 @@ export default function DobraBBSkinDetalhes() {
                     ))}
                 </div>
 
-                {/* --- MUDANÇA: Link transformado em botão --- */}
-                <a href={finalCtaLink} target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
+                {/* --- MUDANÇA: Adicionado onClick e removido target blank --- */}
+                <a href={finalCtaLink} onClick={handleScrollToOfertas} className={styles.ctaButton}>
                     PEÇA O SEU AGORA
                 </a>
                 {/* --- FIM DA MUDANÇA --- */}

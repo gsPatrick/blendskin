@@ -7,6 +7,19 @@ import styles from './DobraGaleriaProdutos.module.css';
 export default function DobraGaleriaProdutos() {
   const sectionRef = useRef(null);
 
+  // --- MUDANÇA: Função para rolagem suave ---
+  const handleScrollToOfertas = (event) => {
+    event.preventDefault(); // Impede o salto do link
+    const targetElement = document.querySelector('#ofertas');
+    if (targetElement) {
+        targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+  };
+  // --- FIM DA MUDANÇA ---
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -31,20 +44,19 @@ export default function DobraGaleriaProdutos() {
     };
   }, []);
 
-  const sectionBackgroundColor = "#bdae9a"; // Cor de fundo mantida
+  const sectionBackgroundColor = "#bdae9a";
 
-  // --- MUDANÇA AQUI: Frases de impacto corretas para cada produto ---
   const galleryItems = [
     {
-      image: "/images/blendskin.jpg", // Imagem da Espuma
+      image: "/images/blendskin.jpg",
       impactPhrase: "LIMPEZA PROFUNDA.\nPELE RENOVADA."
     },
     {
-      image: "/images/serum2.webp", // Imagem do Sérum
+      image: "/images/serum2.webp",
       impactPhrase: "LUMINOSIDADE E PODER.\nPELE RADIANTE."
     },
     {
-      image: "/images/bbskin.webp", // Imagem do BB Skin
+      image: "/images/bbskin.webp",
       impactPhrase: "PROTEÇÃO E COBERTURA.\nEFEITO BLUR IMEDIATO."
     }
   ];
@@ -57,22 +69,27 @@ export default function DobraGaleriaProdutos() {
     >
        <div className={styles.galleryContainer}>
            {galleryItems.map((item, index) => (
-               <div key={index} className={styles.galleryItem}>
+               // --- MUDANÇA: Adicionado onClick para acionar a rolagem suave em cada card ---
+               <a 
+                key={index} 
+                href="#ofertas" 
+                onClick={handleScrollToOfertas} 
+                className={styles.galleryItem}
+               >
                    <div
                        className={styles.itemBackground}
                        style={{ backgroundImage: `url(${item.image})` }}
                    ></div>
                    
-                   {/* Overlay em gradiente para legibilidade */}
                    <div className={styles.itemOverlay}></div>
 
-                   {/* Texto posicionado na parte inferior */}
                    <div className={styles.itemText}>
                        <p className={styles.impactPhrase}>
                             <span dangerouslySetInnerHTML={{ __html: item.impactPhrase.replace(/\n/g, '<br/>') }}></span>
                        </p>
                    </div>
-               </div>
+               </a>
+               // --- FIM DA MUDANÇA ---
            ))}
        </div>
     </section>

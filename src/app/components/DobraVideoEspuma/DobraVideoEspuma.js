@@ -12,6 +12,19 @@ export default function DobraDuoEssencial() {
         setOpenAccordion(openAccordion === index ? null : index);
     };
 
+    // --- MUDANÇA: Função para rolagem suave ---
+    const handleScrollToOfertas = (event) => {
+        event.preventDefault(); // Impede o salto do link
+        const targetElement = document.querySelector('#ofertas');
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+    // --- FIM DA MUDANÇA ---
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -84,8 +97,8 @@ export default function DobraDuoEssencial() {
                     ))}
                 </div>
 
-                {/* --- MUDANÇA: Link transformado em botão --- */}
-                <a href={finalCtaLink} className={styles.ctaButton}>
+                {/* --- MUDANÇA: Adicionado onClick para acionar a rolagem suave --- */}
+                <a href={finalCtaLink} onClick={handleScrollToOfertas} className={styles.ctaButton}>
                     DESCUBRA A ROTINA COMPLETA
                 </a>
                 {/* --- FIM DA MUDANÇA --- */}

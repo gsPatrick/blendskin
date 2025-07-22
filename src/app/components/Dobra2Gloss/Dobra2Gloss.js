@@ -1,4 +1,3 @@
-// components/Dobra2Gloss/Dobra2Gloss.js
 "use client"; // Componente Cliente
 
 import React, { useRef, useEffect } from 'react';
@@ -7,8 +6,20 @@ import styles from './Dobra2Gloss.module.css';
 
 export default function Dobra2Gloss() {
   const sectionRef = useRef(null);
-  const contentRef = useRef(null); // Ref para o container principal do conteúdo
+  const contentRef = useRef(null);
 
+  // --- MUDANÇA: Função para rolagem suave ---
+  const handleScrollToOfertas = (event) => {
+    event.preventDefault(); // Impede o salto do link
+    const targetElement = document.querySelector('#ofertas');
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -43,25 +54,21 @@ export default function Dobra2Gloss() {
   const posterSrc = "/images/gloss-poster.jpg"; // <<-- Adicione um caminho para o poster!
   const ctaLink = "https://wa.me/5562984077070";
 
-  return (
+ return (
     <section ref={sectionRef} className={`${styles.dobraSection} scroll-section`}>
-      {/* Vídeo de Fundo */}
       <video
         className={styles.sectionVideo}
         autoPlay
         loop
-        muted // <<< CONFIRMADO: Muted está presente
-        playsInline // <<< CONFIRMADO: PlaysInline está presente
-        poster={posterSrc} // <<< ADICIONADO o atributo poster! Crie a imagem!
+        muted
+        playsInline
+        poster={posterSrc}
       >
         <source src={videoSrc} type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
       </video>
-
-      {/* Overlay para melhorar o contraste do texto */}
       <div className={styles.overlay}></div>
 
-      {/* Conteúdo sobreposto - Apenas título, descrição e CTA */}
       <div ref={contentRef} className={styles.contentContainer}>
         <h2 className={styles.sectionTitle}>
           {title}
@@ -70,18 +77,16 @@ export default function Dobra2Gloss() {
           {description}
         </p>
 
-        {/* Removido: benefitsList */}
-
+        {/* --- MUDANÇA: Adicionado onClick para acionar a rolagem suave --- */}
         <a
           href={ctaLink}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleScrollToOfertas}
           className={`${styles.ctaButton} ${styles.ctaHighlight}`}
         >
           QUERO LÁBIOS PERFEITOS AGORA
         </a>
+        {/* --- FIM DA MUDANÇA --- */}
       </div>
-
     </section>
   );
 }

@@ -12,6 +12,18 @@ export default function DobraRotinaCompleta() {
         setOpenAccordion(openAccordion === index ? null : index);
     };
 
+    // --- MUDANÇA: Função para rolagem suave ---
+    const handleScrollToOfertas = (event) => {
+        event.preventDefault(); // Impede o salto do link
+        const targetElement = document.querySelector('#ofertas');
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    };
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -57,7 +69,7 @@ export default function DobraRotinaCompleta() {
     const finalCtaLink = "#ofertas";
     const imageSrc = "/images/blendskin-espuma.jpg"; 
 
-    return (
+   return (
         <section ref={sectionRef} className={`${styles.dobraSection} scroll-section`}>
             {/* Lado Esquerdo: Imagem */}
             <div className={styles.mediaSide}>
@@ -94,8 +106,8 @@ export default function DobraRotinaCompleta() {
                     ))}
                 </div>
 
-                {/* --- MUDANÇA: Link transformado em botão --- */}
-                <a href={finalCtaLink} target="_blank" rel="noopener noreferrer" className={styles.ctaButton}>
+                {/* --- MUDANÇA: Adicionado onClick para acionar a rolagem suave --- */}
+                <a href={finalCtaLink} onClick={handleScrollToOfertas} className={styles.ctaButton}>
                     QUERO A ROTINA COMPLETA
                 </a>
                 {/* --- FIM DA MUDANÇA --- */}

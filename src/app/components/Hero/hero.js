@@ -20,41 +20,39 @@ export default function Hero() {
   const subtitleRef = useRef(null);
   const ctaRef = useRef(null);
   const socialProofRef = useRef(null);
-  const scrollIndicatorRef = useRef(null); // Ref para o novo indicador
+  const scrollIndicatorRef = useRef(null);
+
+  // --- MUDANÇA: Função para rolagem suave do botão principal ---
+  const handleScrollToOfertas = (event) => {
+    event.preventDefault();
+    const targetElement = document.querySelector('#ofertas');
+    if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // --- MUDANÇA: Função para rolagem suave do indicador de scroll ---
+  const handleScrollToNextSection = (event) => {
+    event.preventDefault();
+    const nextSection = heroRef.current.nextElementSibling;
+    if (nextSection) {
+        nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+  // --- FIM DAS MUDANÇAS ---
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // ANIMAÇÃO DE APRESENTAÇÃO APRIMORADA
-      // A ideia é criar uma sequência cinematográfica, revelando cada elemento.
-
       const tl = gsap.timeline({
         defaults: { duration: 1.2, ease: "power3.out" }
       });
 
-      // 1. O vídeo de fundo faz um zoom-out suave para revelar a cena.
-      tl.fromTo(videoRef.current,
-        { scale: 1.15 },
-        { scale: 1, duration: 2.5 }
-      );
+      tl.fromTo(videoRef.current, { scale: 1.15 }, { scale: 1, duration: 2.5 });
+      tl.fromTo([titleRef.current, subtitleRef.current], { opacity: 0, y: 40 }, { opacity: 1, y: 0, stagger: 0.2 }, "-=1.5");
+      tl.fromTo([ctaRef.current, socialProofRef.current, scrollIndicatorRef.current], { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.2 }, "-=0.8");
 
-      // 2. O conteúdo principal entra em cena com um stagger coreografado.
-      tl.fromTo([titleRef.current, subtitleRef.current],
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, stagger: 0.2 },
-        "-=1.5" // Começa um pouco antes do fim da animação do vídeo
-      );
-
-      // 3. O botão e os elementos secundários aparecem por último.
-      tl.fromTo([ctaRef.current, socialProofRef.current, scrollIndicatorRef.current],
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, stagger: 0.2 },
-        "-=0.8" // Começa um pouco antes do fim da animação do título/subtítulo
-      );
-
-
-      // EFEITO PARALLAX (mantido, pois é essencial para a estética premium)
       gsap.to(contentRef.current, {
-        yPercent: -15, // Aumenta um pouco o efeito
+        yPercent: -15,
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
@@ -88,12 +86,9 @@ export default function Hero() {
         autoPlay
         loop
         muted
-        playsInline // Atributo essencial para iOS
-        poster="/images/hero-poster.jpg" // Poster é importante para o carregamento
+        playsInline
+        poster="/images/hero-poster.jpg"
       >
-        {/* MODIFICAÇÃO PRINCIPAL ABAIXO */}
-        {/* 1. Adicionado source .mp4 para máxima compatibilidade (especialmente iPhones) */}
-        {/* 2. Corrigido o tipo do .webm */}
         <source src="/video/heronovo.webm" type="video/webm" />
         <source src="/video/heronovo.mp4" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
@@ -109,15 +104,16 @@ export default function Hero() {
           A ciência e a natureza se unem para transformar você.
         </p>
 
+        {/* --- MUDANÇA: href e onClick atualizados --- */}
         <a
           ref={ctaRef}
-          href="https://wa.me/5562984077070"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#ofertas"
+          onClick={handleScrollToOfertas}
           className={styles.ctaButton}
         >
           QUERO CUIDAR DA MINHA PELE AGORA
         </a>
+        {/* --- FIM DA MUDANÇA --- */}
 
         <div ref={socialProofRef} className={styles.socialProof}>
             <span>Compra Segura</span>
@@ -128,12 +124,19 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* NOVO: Indicador de rolagem minimalista */}
-      <div ref={scrollIndicatorRef} className={styles.scrollIndicator}>
+      {/* --- MUDANÇA: Indicador agora é clicável e usa a nova função de scroll --- */}
+      <div 
+        ref={scrollIndicatorRef} 
+        className={styles.scrollIndicator}
+        onClick={handleScrollToNextSection}
+        role="button"
+        aria-label="Rolar para a próxima seção"
+      >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19.9201 8.9502L13.4001 15.4702C12.6301 16.2402 11.3701 16.2402 10.6001 15.4702L4.08008 8.9502" stroke="white" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
+      {/* --- FIM DA MUDANÇA --- */}
 
     </section>
   );
