@@ -69,19 +69,32 @@
 .kitImageSide { flex: 0 0 50%; }
 .kitImageSide img { width: 100%; height: 100%; object-fit: cover; }
 .kitContentSide, .kitImageSide { z-index: 1; }
-.kitContentSide { flex: 1; padding: 60px; text-align: left; } /* Ajustado text-align */
+.kitContentSide { flex: 1; padding: 60px; text-align: left; display: flex; flex-direction: column; justify-content: center;}
 .kitTitle { font-size: 2.5rem; color: var(--color-branco); }
+.kitItems { font-family: var(--font-corpo); margin-top: 0.5em; font-size: 1.2rem; color: rgba(255, 255, 255, 0.9);}
+
+/* --- MUDANÇA: Preço do Kit com mais destaque --- */
+.kitTotalPrice {
+  font-family: var(--font-titulo);
+  font-size: 4.5rem; /* Aumentado para dar mais ênfase */
+  font-weight: 800;
+  color: var(--color-dourado); /* Cor dourada para destaque */
+  line-height: 1;
+  margin: 0.3em 0; /* Espaçamento vertical ajustado */
+}
+/* --- Fim da Mudança --- */
+
 .kitCtaButton {
-  display: inline-block; /* Ajustado para inline-block */
-  /* ...outros estilos do botão do kit... */
+  display: inline-block;
   background-color: var(--color-dourado);
   color: var(--color-petroleo);
   border: 1px solid transparent;
   padding: 18px 35px; border-radius: 10px;
   text-align: center; font-weight: 700;
-  margin-top: 2em; /* Espaço acima do botão */
+  margin-top: 1.5em; /* Espaço acima do botão */
   transition: all 0.3s ease; text-transform: uppercase;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  align-self: flex-start; /* Alinha o botão à esquerda */
 }
 .kitCtaButton:hover {
   background-color: var(--color-branco);
@@ -102,22 +115,6 @@
   z-index: 2;
   text-transform: uppercase;
 }
-.socialProofIcons {
-  font-family: var(--font-corpo); /* Satoshi */
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8); /* Branco suave para os ícones */
-  margin-top: 1.5em;
-  display: flex;
-  justify-content: flex-start; /* Alinha à esquerda no desktop */
-  align-items: center;
-  flex-wrap: wrap; /* Quebra linha se houver muitos */
-}
-.socialProofIcons span {
-  margin: 0 8px 0 0; /* Espaço entre os itens de prova social */
-  font-weight: 300;
-  white-space: nowrap; /* Impede quebras de linha dentro do span */
-}
-
 
 /* --- Cards Individuais (DESIGN TOTALMENTE NOVO) --- */
 .productsGrid {
@@ -128,20 +125,12 @@
 .productCard {
   display: flex; flex-direction: column;
   border-radius: 16px; padding: 30px;
-
-  /* Habilita o contexto 3D */
   transform-style: preserve-3d;
-
-  /* Efeito de Vidro Fosco */
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-
-  /* Estado inicial para animação de entrada */
   opacity: 0;
   transform: perspective(1000px) translateY(60px) scale(0.95) rotateX(-15deg);
-
-  /* Transição suave para o reset no mouseleave */
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
               opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1),
               box-shadow 0.4s ease, border-color 0.4s ease;
@@ -163,7 +152,6 @@
 
 .productImageContainer {
   margin-bottom: 2em;
-  /* Efeito de profundidade 3D */
   transform: translateZ(40px);
 }
 .productImageContainer img {
@@ -173,23 +161,25 @@
 
 .productInfo {
   text-align: center;
-  /* Efeito de profundidade 3D */
   transform: translateZ(20px);
 }
 
-/* --- CORES DO TEXTO CORRIGIDAS --- */
 .productName {
   font-family: var(--font-titulo);
   font-size: 1.8rem;
-  color: var(--color-branco); /* COR CORRIGIDA */
+  color: var(--color-branco);
   margin-bottom: 0.5em; line-height: 1.2;
 }
 
+/* --- MUDANÇA: Preço do produto individual com mais destaque --- */
 .productPrice {
   font-family: var(--font-corpo);
-  font-size: 1.2rem; font-weight: 700;
-  color: var(--color-dourado); /* COR CORRIGIDA */
+  font-size: 1.8rem; /* Aumentado */
+  font-weight: 800; /* Mais pesado */
+  color: var(--color-dourado);
+  margin-bottom: 0.5em; /* Adicionado espaço abaixo */
 }
+/* --- Fim da Mudança --- */
 
 .productCtaButton {
   display: block; width: 100%;
@@ -200,8 +190,6 @@
   text-align: center; font-weight: 700;
   margin-top: auto;
   transition: all 0.3s ease; text-transform: uppercase;
-
-  /* Efeito de profundidade 3D */
   transform: translateZ(30px);
 }
 .productCtaButton:hover {
@@ -211,157 +199,71 @@
 }
 
 /* --- Responsividade --- */
-@media (max-width: 1024px) { /* Tablets maiores e desktops menores */
-  .ofertaProdutosSection {
-      padding: 80px 30px; /* Ajuste padding */
-  }
-  .sectionTitle {
-      font-size: 3rem;
-  }
-  .individualProductsIntro h3 {
-      font-size: 1.1rem;
-  }
-  /* --- MUDANÇA: Ajuste do kitContainer para mobile/tablet --- */
-  .kitContainer {
-      max-width: 600px; /* Limita a largura do kit em tablets */
-      margin: 0 auto 60px auto; /* Centraliza e ajusta margem */
-  }
+@media (max-width: 1024px) {
+  .ofertaProdutosSection { padding: 80px 30px; }
+  .sectionTitle { font-size: 3rem; }
+  .individualProductsIntro h3 { font-size: 1.1rem; }
+  .kitContainer { max-width: 600px; margin: 0 auto 60px auto; }
+
+  .kitCard { flex-direction: column; }
+  .kitImageSide { width: 100%; height: 300px; }
+  .kitContentSide { text-align: center; padding: 40px 30px; }
+  .kitCtaButton { align-self: center; } /* Centraliza o botão no mobile */
+  .kitTitle { font-size: 2.2rem; }
+  .kitItems { font-size: 1.1rem; }
+  /* --- MUDANÇA: Ajuste do preço do kit para tablet --- */
+  .kitTotalPrice { font-size: 3.8rem; }
   /* --- Fim da Mudança --- */
 
-  .kitCard {
-      flex-direction: column; /* Empilha imagem e conteúdo do kit */
-  }
-  .kitImageSide {
-      width: 100%; /* Ocupa 100% da largura do card */
-      height: 300px; /* Ajusta altura da imagem do kit */
-  }
-  .kitContentSide {
-      text-align: center; /* Centraliza o texto do kit no mobile */
-      padding: 40px 30px; /* Ajusta padding */
-  }
-   .kitTitle {
-       font-size: 2.2rem;
-   }
-   .kitItems {
-       font-size: 1.1rem;
-   }
-   .kitNewPrice {
-       font-size: 3.5rem;
-   }
-   .kitCtaButton {
-       font-size: 1.2rem;
-       padding: 15px 30px;
-   }
-   .socialProofIcons {
-       justify-content: center; /* Centraliza os ícones no mobile */
-   }
-   .socialProofIcons span {
-       margin: 0 5px; /* Espaço menor entre os itens */
-   }
-
-
-  .productsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Permite 2 ou 3 colunas, adapta */
-    gap: 30px;
-  }
-  .productImageContainer img { height: 250px; } /* Ajusta altura da imagem individual */
+  .productsGrid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+  .productImageContainer img { height: 250px; }
   .productName { font-size: 1.6rem; }
-  .productPrice { font-size: 1.1rem; }
+  /* --- MUDANÇA: Ajuste do preço individual para tablet --- */
+  .productPrice { font-size: 1.6rem; }
+  /* --- Fim da Mudança --- */
   .productCtaButton { font-size: 0.95rem; padding: 10px 20px; }
 }
 
-@media (max-width: 768px) { /* Tablets menores e mobile */
-  .ofertaProdutosSection {
-    padding: 60px 20px;
-  }
-  .sectionTitle {
-    font-size: 2.5rem;
-  }
-  .sectionSubtitle {
-    font-size: 1rem;
-  }
-  .kitContainer {
-      max-width: 100%; /* Permite ocupar a largura total no mobile */
-      margin-bottom: 50px; /* Ajusta margem */
-  }
-  .kitImageSide {
-    height: 250px; /* Ajusta altura da imagem do kit */
-  }
-  .kitContentSide {
-      padding: 30px 20px; /* Ajusta padding */
-  }
-  .kitTitle {
-      font-size: 2rem;
-  }
-  .kitItems {
-      font-size: 1rem;
-  }
-  .kitOldPrice, .kitInstallment, .kitTotalPrice {
-      font-size: 0.9rem;
-  }
-  .kitNewPrice {
-      font-size: 3rem;
-  }
-  .kitCtaButton {
-      font-size: 1.1rem;
-      padding: 15px 25px;
-  }
-  .socialProofIcons {
-      font-size: 0.8rem;
-  }
+@media (max-width: 768px) {
+  .ofertaProdutosSection { padding: 60px 20px; }
+  .sectionTitle { font-size: 2.5rem; }
+  .kitContainer { max-width: 100%; margin-bottom: 50px; }
+  .kitImageSide { height: 250px; }
+  .kitContentSide { padding: 30px 20px; }
+  .kitTitle { font-size: 2rem; }
+  .kitItems { font-size: 1rem; }
+  /* --- MUDANÇA: Ajuste do preço do kit para mobile --- */
+  .kitTotalPrice { font-size: 3.2rem; }
+  /* --- Fim da Mudança --- */
+  .kitCtaButton { width: 100%; padding: 15px 25px; }
 
-
-  .productsGrid {
-    grid-template-columns: 1fr; /* Uma coluna no mobile (empilha os produtos) */
-    gap: 30px;
-    max-width: 350px; /* Limita a largura dos cards individuais no mobile */
-     margin: 0 auto; /* Centraliza a grid */
-  }
-  .productCard {
-    padding: 25px;
-  }
-  .productImageContainer img { height: 200px; } /* Ajusta altura da imagem individual */
+  .productsGrid { grid-template-columns: 1fr; gap: 30px; max-width: 350px; margin: 0 auto; }
+  .productCard { padding: 25px; }
+  .productImageContainer img { height: 200px; }
   .productName { font-size: 1.5rem; }
-  .productDescription { font-size: 0.9rem; }
+  /* --- MUDANÇA: Ajuste do preço individual para mobile --- */
+  .productPrice { font-size: 1.5rem; }
+  /* --- Fim da Mudança --- */
   .productCtaButton { font-size: 0.9rem; padding: 10px 20px; }
 }
 
-@media (max-width: 480px) { /* Mobile muito pequeno */
-  .ofertaProdutosSection {
-    padding: 40px 15px;
-  }
-  .sectionTitle {
-    font-size: 2rem;
-  }
-  .sectionSubtitle {
-    font-size: 0.9rem;
-  }
+@media (max-width: 480px) {
+  .ofertaProdutosSection { padding: 40px 15px; }
+  .sectionTitle { font-size: 2.2rem; }
 
-  .kitImageSide {
-    height: 200px; /* Ajusta altura da imagem do kit */
-  }
-  .kitContentSide {
-    padding: 25px 15px; /* Ajusta padding */
-  }
-  .kitTitle {
-    font-size: 1.8rem;
-  }
-  .kitNewPrice {
-    font-size: 2.5rem;
-  }
-  .kitCtaButton {
-    font-size: 1rem;
-    padding: 12px 25px;
-  }
-   .socialProofIcons span {
-       margin: 0 3px; /* Reduz espaço */
-   }
+  .kitImageSide { height: 200px; }
+  .kitContentSide { padding: 25px 15px; }
+  .kitTitle { font-size: 1.8rem; }
+  /* --- MUDANÇA: Ajuste do preço do kit para mobile pequeno --- */
+  .kitTotalPrice { font-size: 2.8rem; }
+  /* --- Fim da Mudança --- */
+  .kitCtaButton { font-size: 1rem; padding: 12px 25px; }
 
-  .productsGrid {
-    gap: 20px; /* Reduz gap */
-  }
-  .productImageContainer img { height: 150px; } /* Ajusta altura da imagem individual */
+  .productsGrid { gap: 20px; }
+  .productImageContainer img { height: 180px; }
   .productName { font-size: 1.4rem; }
-  .productDescription { font-size: 0.8rem; }
+  /* --- MUDANÇA: Ajuste do preço individual para mobile pequeno --- */
+  .productPrice { font-size: 1.4rem; }
+  /* --- Fim da Mudança --- */
   .productCtaButton { font-size: 0.85rem; padding: 8px 18px; }
 }

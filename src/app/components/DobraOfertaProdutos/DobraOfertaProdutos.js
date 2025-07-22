@@ -4,7 +4,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './DobraOfertaProdutos.module.css';
 
-// NOVO: Componente para o Card com Efeito 3D Tilt
+// Componente para o Card com Efeito 3D Tilt
 function TiltProductCard({ product }) {
   const cardRef = useRef(null);
 
@@ -53,7 +53,6 @@ export default function DobraOfertaProdutos() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    // ... (código do IntersectionObserver permanece o mesmo)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -77,17 +76,24 @@ export default function DobraOfertaProdutos() {
     };
   }, []);
 
-  // (Cole aqui os dados de kitProduct e products da versão anterior para manter o código limpo)
+  // --- VALORES ATUALIZADOS ---
   const kitProductData = {
-    id: 'kit-essencial', title: "KIT BLENDSKIN: Sua Rotina Completa", items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur", image: '/images/blendskin-espuma.webp', oldPrice: "De R$ 541,00", installmentValue: '39,70', installments: '12x de', totalPrice: 'Ou R$ 397,00 à Vista', ctaLink: 'https://blendskin.pay.yampi.com.br/b/GHRGG0V8SOOW', ctaText: 'QUERO O KIT COMPLETO',
+    id: 'kit-essencial',
+    title: "KIT BLENDSKIN: Sua Rotina Completa",
+    items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur",
+    image: '/images/blendskin-espuma.webp',
+    totalPrice: 'R$ 349,60', // Novo preço do Kit
+    ctaLink: 'https://blendskin.pay.yampi.com.br/b/GHRGG0V8SOOW',
+    ctaText: 'QUERO O KIT COMPLETO',
   };
-  
-  // DADOS DOS PRODUTOS COM LINKS ATUALIZADOS
+
   const productsData = [
-    { id: 'espuma', name: 'Espuma De Limpeza Facial', image: '/produtos/1.png', ctaLink: 'https://blendskin.pay.yampi.com.br/r/F4HUB8FAWX', ctaText: 'COMPRAR AGORA' },
-    { id: 'serum', name: 'Sérum Vit C - PLUS', image: '/produtos/3.png', totalPrice: 'R$ 247,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/M83S60T0SY', ctaText: 'COMPRAR AGORA' },
-    { id: 'bbskin', name: 'BBSKIN Blur Facial FPS 50 NATURAL', image: '/produtos/2.png', totalPrice: 'R$ 147,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/55YHYO2CUH', ctaText: 'COMPRAR AGORA' },
+    { id: 'espuma', name: 'Espuma De Limpeza Facial', image: '/produtos/1.png', totalPrice: 'R$ 99,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/F4HUB8FAWX', ctaText: 'COMPRAR AGORA' },
+    { id: 'serum', name: 'Sérum Vit C - PLUS', image: '/produtos/3.png', totalPrice: 'R$ 189,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/M83S60T0SY', ctaText: 'COMPRAR AGORA' },
+    { id: 'bbskin', name: 'BBSKIN Blur Facial FPS 50 NATURAL', image: '/produtos/2.png', totalPrice: 'R$ 149,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/55YHYO2CUH', ctaText: 'COMPRAR AGORA' },
   ];
+  // --- FIM DA ATUALIZAÇÃO DE VALORES ---
+
 
   return (
     <section ref={sectionRef} id="ofertas" className={`${styles.ofertaProdutosSection} scroll-section`}>
@@ -104,13 +110,12 @@ export default function DobraOfertaProdutos() {
             <span className={styles.recommendedTag}>MAIS VENDIDO</span>
             <h3 className={styles.kitTitle}>{kitProductData.title}</h3>
             <p className={styles.kitItems}>{kitProductData.items}</p>
-            <span className={styles.kitOldPrice}>{kitProductData.oldPrice}</span>
-            <p className={styles.kitInstallmentText}>{kitProductData.installments}</p>
-            <p className={styles.kitInstallmentPrice}>
-              R$<span>{kitProductData.installmentValue.split(',')[0]}</span>,
-              <sup>{kitProductData.installmentValue.split(',')[1]}</sup>
-            </p>
+
+            {/* --- SEÇÃO DE PREÇO ATUALIZADA --- */}
+            {/* O "Preço antigo" e o "Parcelamento" foram removidos */}
             <p className={styles.kitTotalPrice}>{kitProductData.totalPrice}</p>
+            {/* --- FIM DA ATUALIZAÇÃO --- */}
+            
             <a href={kitProductData.ctaLink} target="_blank" rel="noopener noreferrer" className={styles.kitCtaButton}>
               {kitProductData.ctaText}
             </a>
@@ -124,7 +129,6 @@ export default function DobraOfertaProdutos() {
       
       <div className={styles.productsGrid}>
         {productsData.map((product) => (
-          // Usando o novo componente com efeito 3D
           <TiltProductCard key={product.id} product={product} />
         ))}
       </div>
