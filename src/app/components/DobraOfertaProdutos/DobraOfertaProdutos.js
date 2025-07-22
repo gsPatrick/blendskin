@@ -79,7 +79,7 @@ export default function DobraOfertaProdutos() {
 
   // (Cole aqui os dados de kitProduct e products da versão anterior para manter o código limpo)
   const kitProductData = {
-    id: 'kit-essencial', title: "KIT BLENDSKIN: Sua Rotina Completa", items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur", image: '/images/blendskin-espuma.webp', oldPrice: "De R$ 541,00", installmentValue: '39,70', installments: '12x de', totalPrice: 'Ou R$ 397,00 à Vista', ctaLink: 'https://wa.me/5562984077070?text=Quero%20comprar%20o%20Kit%20Completo%20BlendSkin!', ctaText: 'QUERO O KIT COMPLETO',
+    id: 'kit-essencial', title: "KIT BLENDSKIN: Sua Rotina Completa", items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur", image: '/images/blendskin-espuma.webp', oldPrice: "De R$ 541,00", installmentValue: '39,70', installments: '12x de', totalPrice: 'Ou R$ 397,00 à Vista', ctaLink: 'https://blendskin.pay.yampi.com.br/b/GHRGG0V8SOOW', ctaText: 'QUERO O KIT COMPLETO',
   };
   
   // DADOS DOS PRODUTOS COM LINKS ATUALIZADOS
