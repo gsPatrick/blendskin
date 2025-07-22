@@ -8,6 +8,19 @@ import styles from './Footer.module.css';
 export default function Footer() {
   const footerRef = useRef(null);
 
+  // --- MUDANÇA: Função para rolagem suave ---
+  const handleSmoothScroll = (event, targetId) => {
+    event.preventDefault();
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+        targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+  };
+  // --- FIM DA MUDANÇA ---
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -37,14 +50,14 @@ export default function Footer() {
   const instagramLink = "https://instagram.com/blendskin";
   const tiktokLink = "https://tiktok.com/@blendskin";
 
+  // --- MUDANÇA: Removido o link "Produtos" ---
   const quickLinks = [
     { name: "Início", href: "#hero" },
-    { name: "Produtos", href: "#produtos" }, // Exemplo, ajuste os IDs
     { name: "Ofertas", href: "#ofertas" },
   ];
+  // --- FIM DA MUDANÇA ---
 
-  // --- ATENÇÃO: Caminhos para os logos BRANCOS/CLAROS ---
-  const logoSrc = "/images/blendskinlogo.png"; // <-- VERIFIQUE ESTE CAMINHO! Deve ser um logo BRANCO.
+  const logoSrc = "/images/blendskinlogo.png";
 
   return (
     <footer ref={footerRef} className={styles.footerSection}>
@@ -54,7 +67,11 @@ export default function Footer() {
                <ul className={styles.quickLinksList}>
                    {quickLinks.map((link, index) => (
                        <li key={index}>
-                           <a href={link.href}>{link.name}</a>
+                           {/* --- MUDANÇA: Adicionado onClick para rolagem suave --- */}
+                           <a href={link.href} onClick={(e) => handleSmoothScroll(e, link.href)}>
+                               {link.name}
+                           </a>
+                           {/* --- FIM DA MUDANÇA --- */}
                        </li>
                    ))}
                </ul>

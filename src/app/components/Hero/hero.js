@@ -22,7 +22,7 @@ export default function Hero() {
   const socialProofRef = useRef(null);
   const scrollIndicatorRef = useRef(null);
 
-  // --- MUDANÇA: Função para rolagem suave do botão principal ---
+  // Função para rolagem suave do botão principal
   const handleScrollToOfertas = (event) => {
     event.preventDefault();
     const targetElement = document.querySelector('#ofertas');
@@ -31,7 +31,7 @@ export default function Hero() {
     }
   };
 
-  // --- MUDANÇA: Função para rolagem suave do indicador de scroll ---
+  // Função para rolagem suave do indicador de scroll
   const handleScrollToNextSection = (event) => {
     event.preventDefault();
     const nextSection = heroRef.current.nextElementSibling;
@@ -39,7 +39,6 @@ export default function Hero() {
         nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
-  // --- FIM DAS MUDANÇAS ---
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -47,10 +46,14 @@ export default function Hero() {
         defaults: { duration: 1.2, ease: "power3.out" }
       });
 
-      tl.fromTo(videoRef.current, { scale: 1.15 }, { scale: 1, duration: 2.5 });
+      // --- ALTERAÇÕES: REMOVIDAS ANIMAÇÕES DIRETAS DO VÍDEO PARA OTIMIZAÇÃO E COMPATIBILIDADE COM iOS ---
+      // tl.fromTo(videoRef.current, { scale: 1.15 }, { scale: 1, duration: 2.5 }); // Removido para evitar tremidas e garantir autoplay
+      
       tl.fromTo([titleRef.current, subtitleRef.current], { opacity: 0, y: 40 }, { opacity: 1, y: 0, stagger: 0.2 }, "-=1.5");
       tl.fromTo([ctaRef.current, socialProofRef.current, scrollIndicatorRef.current], { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.2 }, "-=0.8");
 
+      // Animação de parallax para o CONTEÚDO (texto e botões)
+      // Aplicar o parallax ao conteúdo em vez do vídeo é mais estável no iOS
       gsap.to(contentRef.current, {
         yPercent: -15,
         ease: "none",
@@ -62,16 +65,17 @@ export default function Hero() {
         }
       });
 
-      gsap.to(videoRef.current, {
-        yPercent: 5,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        }
-      });
+      // --- ALTERAÇÕES: REMOVIDA ANIMAÇÃO DE PARALLAX NO VÍDEO PARA OTIMIZAÇÃO E COMPATIBILIDADE COM iOS ---
+      // gsap.to(videoRef.current, { // Removido para evitar tremidas e garantir autoplay
+      //   yPercent: 5,
+      //   ease: "none",
+      //   scrollTrigger: {
+      //     trigger: heroRef.current,
+      //     start: "top top",
+      //     end: "bottom top",
+      //     scrub: true,
+      //   }
+      // });
 
     }, heroRef);
 
@@ -89,6 +93,7 @@ export default function Hero() {
         playsInline
         poster="/images/hero-poster.jpg"
       >
+        {/* Certifique-se de que estes arquivos de vídeo estão otimizados (tamanho e bitrate reduzidos) */}
         <source src="/video/heronovo.webm" type="video/webm" />
         <source src="/video/heronovo.mp4" type="video/mp4" />
         Seu navegador não suporta a tag de vídeo.
@@ -104,7 +109,6 @@ export default function Hero() {
           A ciência e a natureza se unem para transformar você.
         </p>
 
-        {/* --- MUDANÇA: href e onClick atualizados --- */}
         <a
           ref={ctaRef}
           href="#ofertas"
@@ -113,7 +117,6 @@ export default function Hero() {
         >
           QUERO CUIDAR DA MINHA PELE AGORA
         </a>
-        {/* --- FIM DA MUDANÇA --- */}
 
         <div ref={socialProofRef} className={styles.socialProof}>
             <span>Compra Segura</span>
@@ -124,7 +127,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* --- MUDANÇA: Indicador agora é clicável e usa a nova função de scroll --- */}
       <div 
         ref={scrollIndicatorRef} 
         className={styles.scrollIndicator}
@@ -136,7 +138,6 @@ export default function Hero() {
             <path d="M19.9201 8.9502L13.4001 15.4702C12.6301 16.2402 11.3701 16.2402 10.6001 15.4702L4.08008 8.9502" stroke="white" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </div>
-      {/* --- FIM DA MUDANÇA --- */}
 
     </section>
   );
