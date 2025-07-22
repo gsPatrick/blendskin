@@ -90,9 +90,9 @@ export default function DobraOfertaProdutos() {
   };
 
   const productsData = [
-    { id: 'espuma', name: 'Espuma De Limpeza Facial', image: '/produtos/1.png', priceImage: '/99.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/F4HUB8FAWX', ctaText: 'COMPRAR AGORA' },
+    { id: 'espuma', name: 'Espuma De Limpeza Facial', image: '/produtos/bombom.png', priceImage: '/99.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/F4HUB8FAWX', ctaText: 'COMPRAR AGORA' },
     { id: 'serum', name: 'Sérum Vitamina C - PLUS', image: '/produtos/3.png', priceImage: '/189.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/M83S60T0SY', ctaText: 'COMPRAR AGORA' },
-    { id: 'bbskin', name: 'BBSKIN Blur Facial FPS 50 NATURAL', image: '/produtos/2.png', priceImage: '/149.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/55YHYO2CUH', ctaText: 'COMPRAR AGORA' },
+    { id: 'bbskin', name: 'BBSKIN Blur Facial FPS 50 NATURAL', image: '/produtos/direita.png', priceImage: '/149.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/55YHYO2CUH', ctaText: 'COMPRAR AGORA' },
   ];
 
 
