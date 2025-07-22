@@ -54,7 +54,7 @@ export default function DobraRotinaCompleta() {
         }
     ];
     
-    const finalCtaLink = "https://wa.me/5562984077070?text=Quero%20saber%20mais%20sobre%20a%20Rotina%20Completa%20BlendSkin!";
+    const finalCtaLink = "#ofertas";
     const imageSrc = "/images/blendskin-espuma.jpg"; 
 
     return (
