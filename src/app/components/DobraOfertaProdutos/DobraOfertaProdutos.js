@@ -1,7 +1,7 @@
 // app/components/DobraOfertaProdutos/DobraOfertaProdutos.js
 "use client";
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './DobraOfertaProdutos.module.css';
 
 // Componente para o Card com Efeito 3D Tilt
@@ -15,7 +15,7 @@ function TiltProductCard({ product }) {
     const x = e.clientX - left;
     const y = e.clientY - top;
 
-    const rotateX = ((y / height) - 0.5) * -25; // Intensidade do efeito
+    const rotateX = ((y / height) - 0.5) * -25;
     const rotateY = ((x / width) - 0.5) * 25;
 
     cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
@@ -38,7 +38,11 @@ function TiltProductCard({ product }) {
       </div>
       <div className={styles.productInfo}>
         <h4 className={styles.productName}>{product.name}</h4>
-        <p className={styles.productPrice}>{product.totalPrice}</p>
+        <img 
+          src={product.priceImage} 
+          alt={`Preço de ${product.name}`} 
+          className={styles.productPriceImage} 
+        />
       </div>
       <a href={product.ctaLink} target="_blank" rel="noopener noreferrer" className={styles.productCtaButton}>
         {product.ctaText}
@@ -76,23 +80,20 @@ export default function DobraOfertaProdutos() {
     };
   }, []);
 
-  // --- VALORES ATUALIZADOS ---
   const kitProductData = {
     id: 'kit-essencial',
     title: "KIT BLENDSKIN: Sua Rotina Completa",
     items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur",
     image: '/images/blendskin-espuma.webp',
-    totalPrice: 'R$ 349,60', // Novo preço do Kit
     ctaLink: 'https://blendskin.pay.yampi.com.br/b/GHRGG0V8SOOW',
     ctaText: 'QUERO O KIT COMPLETO',
   };
 
   const productsData = [
-    { id: 'espuma', name: 'Espuma De Limpeza Facial', image: '/produtos/1.png', totalPrice: 'R$ 99,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/F4HUB8FAWX', ctaText: 'COMPRAR AGORA' },
-    { id: 'serum', name: 'Sérum Vit C - PLUS', image: '/produtos/3.png', totalPrice: 'R$ 189,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/M83S60T0SY', ctaText: 'COMPRAR AGORA' },
-    { id: 'bbskin', name: 'BBSKIN Blur Facial FPS 50 NATURAL', image: '/produtos/2.png', totalPrice: 'R$ 149,00', ctaLink: 'https://blendskin.pay.yampi.com.br/r/55YHYO2CUH', ctaText: 'COMPRAR AGORA' },
+    { id: 'espuma', name: 'Espuma De Limpeza Facial', image: '/produtos/1.png', priceImage: '/99.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/F4HUB8FAWX', ctaText: 'COMPRAR AGORA' },
+    { id: 'serum', name: 'Sérum Vitamina C - PLUS', image: '/produtos/3.png', priceImage: '/189.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/M83S60T0SY', ctaText: 'COMPRAR AGORA' },
+    { id: 'bbskin', name: 'BBSKIN Blur Facial FPS 50 NATURAL', image: '/produtos/2.png', priceImage: '/149.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/55YHYO2CUH', ctaText: 'COMPRAR AGORA' },
   ];
-  // --- FIM DA ATUALIZAÇÃO DE VALORES ---
 
 
   return (
@@ -111,10 +112,9 @@ export default function DobraOfertaProdutos() {
             <h3 className={styles.kitTitle}>{kitProductData.title}</h3>
             <p className={styles.kitItems}>{kitProductData.items}</p>
 
-            {/* --- SEÇÃO DE PREÇO ATUALIZADA --- */}
-            {/* O "Preço antigo" e o "Parcelamento" foram removidos */}
-            <p className={styles.kitTotalPrice}>{kitProductData.totalPrice}</p>
-            {/* --- FIM DA ATUALIZAÇÃO --- */}
+            <div className={styles.kitPriceContainer}>
+              <img src="/349.svg" alt="Valor do kit completo" className={styles.kitPriceImage} />
+            </div>
             
             <a href={kitProductData.ctaLink} target="_blank" rel="noopener noreferrer" className={styles.kitCtaButton}>
               {kitProductData.ctaText}
