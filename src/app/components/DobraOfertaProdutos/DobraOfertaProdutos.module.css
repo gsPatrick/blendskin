@@ -130,9 +130,8 @@
 .productCard {
   display: flex; flex-direction: column;
   border-radius: 16px; 
-  /* --- MUDANÇA: Removido padding para a imagem ir até a borda --- */
   padding: 0;
-  overflow: hidden; /* Garante que a imagem não vaze das bordas arredondadas */
+  overflow: hidden;
   transform-style: preserve-3d;
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(15px);
@@ -158,30 +157,30 @@
 }
 
 .productImageContainer {
-  /* --- MUDANÇA: Removida a margem inferior para integrar com o conteúdo --- */
   margin-bottom: 0;
   transform: translateZ(40px);
 }
-/* --- MUDANÇA: Imagem preenchendo o container --- */
 .productImageContainer img {
-  width: 100%; height: 350px;
-  object-fit: cover; /* ALTERADO DE 'contain' PARA 'cover' */
+  width: 100%; height: 350px; /* Altura fixa para alinhar os cards */
+  object-fit: cover;
   filter: drop-shadow(0 15px 20px rgba(0,0,0,0.3));
 }
-/* --- Fim da Mudança --- */
 
 .productInfo {
   text-align: center;
   transform: translateZ(20px);
-  /* --- MUDANÇA: Adicionado padding para o conteúdo não colar nas bordas --- */
   padding: 30px;
+  flex-grow: 1; /* Faz o info-box crescer para empurrar o botão para baixo */
+  display: flex; /* Transforma em flex container */
+  flex-direction: column; /* Conteúdo empilhado verticalmente */
+  justify-content: flex-start; /* Alinha o conteúdo ao topo do flex-box */
 }
 
 .productName {
   font-family: var(--font-titulo);
   font-size: 1.8rem;
   color: var(--color-branco);
-  margin-bottom: 1.2em;
+  margin-bottom: 0.8em;
   line-height: 1.2;
 }
 
@@ -190,18 +189,85 @@
   width: auto;
   max-width: 90%;
   object-fit: contain;
-  margin: 0 auto 2em auto;
+  margin: 0 auto 1.5em auto;
 }
 
+/* --- NOVOS ESTILOS PARA SELEÇÃO DE COR --- */
+.colorSelectionWrapper { /* Novo wrapper para texto de instrução e amostras */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Espaço entre o texto e as amostras */
+  margin-top: auto; /* Empurra esta seção para baixo, antes do botão */
+  flex-grow: 1; /* Permite que este wrapper preencha o espaço, se necessário */
+  justify-content: flex-end; /* Alinha o conteúdo ao final do seu container flex */
+}
+
+.chooseColorText { /* Estilo para o texto "Escolha sua cor:" */
+    font-family: var(--font-corpo);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.colorOptionsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 25px; /* AUMENTADO: Espaço entre as opções de cor */
+  margin-bottom: 2em; /* Espaço entre as opções de cor e o CTA */
+}
+
+.colorOptionItem { /* NOVO: Contém a amostra e o nome da cor */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Espaço entre a amostra e o nome */
+}
+
+.colorSwatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.colorSwatch:hover {
+  border-color: rgba(var(--color-dourado-rgb), 0.5);
+  transform: scale(1.1);
+}
+
+.colorSwatch.selected {
+  border-color: var(--color-dourado);
+  box-shadow: 0 0 0 2px var(--color-dourado), 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.colorLabel { /* NOVO: Estilo para o nome da cor */
+    font-family: var(--font-corpo);
+    font-size: 0.95rem; /* Aumentado para legibilidade */
+    color: rgba(255, 255, 255, 0.85); /* Cor clara para contraste */
+    font-weight: 500; /* Levemente bold */
+    margin: 0;
+}
+/* --- FIM DOS NOVOS ESTILOS --- */
+
+
 .productCtaButton {
-  display: block; width: calc(100% - 60px); /* Ajustado por causa do padding do productInfo */
+  display: flex; /* Transforma em flex para centralizar o texto verticalmente */
+  align-items: center; /* Centraliza o texto verticalmente */
+  justify-content: center; /* Centraliza o texto horizontalmente */
+  width: calc(100% - 60px);
   background-color: var(--color-dourado);
   color: var(--color-petroleo);
   border: 1px solid transparent;
-  padding: 15px 20px; border-radius: 8px;
+  padding: 15px 20px; /* Padding fixo para altura consistente */
+  min-height: 50px; /* Altura mínima para garantir proporção */
+  border-radius: 8px;
   text-align: center; font-weight: 700;
-  margin: 0 auto auto auto; /* marginTop auto, laterais auto para centralizar */
-  margin-bottom: 30px; /* Espaçamento inferior */
+  margin: 0 auto 30px auto;
   transition: all 0.3s ease; text-transform: uppercase;
   transform: translateZ(30px);
 }
@@ -225,8 +291,14 @@
   .kitPriceImage { height: 180px; } 
 
   .productsGrid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-  .productImageContainer img { height: 280px; }
+  .productImageContainer img { height: 280px; } /* Ajuste de altura da imagem */
   .productPriceImage { height: 95px; } 
+  .colorSwatch { width: 25px; height: 25px; } 
+  .colorOptionsContainer { gap: 20px; } /* Ajuste de gap */
+  .colorOptionItem { gap: 6px; } /* Ajuste de gap */
+  .chooseColorText { font-size: 0.9rem; }
+  .colorLabel { font-size: 0.9rem; }
+  .productCtaButton { min-height: 48px; padding: 12px 18px; } 
 }
 
 @media (max-width: 768px) {
@@ -238,9 +310,15 @@
   .kitCtaButton { width: calc(100% - 60px); }
 
   .productsGrid { grid-template-columns: 1fr; max-width: 350px; margin: 0 auto; }
-  .productImageContainer img { height: 240px; }
+  .productImageContainer img { height: 240px; } /* Ajuste de altura da imagem */
   .productName { font-size: 1.5rem; }
   .productPriceImage { height: 85px; } 
+  .colorSwatch { width: 22px; height: 22px; } 
+  .colorOptionsContainer { gap: 15px; } /* Ajuste de gap */
+  .colorOptionItem { gap: 5px; } /* Ajuste de gap */
+  .chooseColorText { font-size: 0.85rem; }
+  .colorLabel { font-size: 0.85rem; }
+  .productCtaButton { min-height: 45px; padding: 10px 15px; }
 }
 
 @media (max-width: 480px) {
@@ -249,7 +327,13 @@
   .kitTitle { font-size: 1.8rem; }
   .kitPriceImage { height: 140px; } 
 
-  .productImageContainer img { height: 220px; }
+  .productImageContainer img { height: 220px; } /* Ajuste de altura da imagem */
   .productName { font-size: 1.4rem; }
   .productPriceImage { height: 75px; } 
+  .colorSwatch { width: 20px; height: 20px; } 
+  .colorOptionsContainer { gap: 10px; } /* Ajuste de gap */
+  .colorOptionItem { gap: 4px; } /* Ajuste de gap */
+  .chooseColorText { font-size: 0.8rem; }
+  .colorLabel { font-size: 0.8rem; }
+  .productCtaButton { min-height: 40px; padding: 8px 12px; }
 }
