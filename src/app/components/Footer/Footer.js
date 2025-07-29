@@ -46,7 +46,7 @@ export default function Footer() {
   }, []);
 
   const whatsappLink = "https://wa.me/5562984077070";
-  const emailContact = "contato@blendskin.com.br";
+  const emailContact = "blendskincosmeticos@gmail.com";
   const instagramLink = "https://instagram.com/blendskin";
   const tiktokLink = "https://tiktok.com/@blendskin";
 

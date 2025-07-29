@@ -61,7 +61,7 @@ function TiltProductCard({ product }) {
         {/* Adiciona as opções de cor se existirem */}
         {product.colors && (
           <div className={styles.colorSelectionWrapper}> {/* Novo wrapper para texto + amostras */}
-            <p className={styles.chooseColorText}>Escolha sua cor:</p> {/* Texto de instrução */}
+            <p className={styles.chooseColorText}>Escolha a cor do seu BB Skin:</p> {/* Texto de instrução */}
             <div className={styles.colorOptionsContainer}>
               {product.colors.map((colorOption) => (
                 <div key={colorOption.value} className={styles.colorOptionItem}> {/* Novo item para amostra + label */}
@@ -93,6 +93,9 @@ function TiltProductCard({ product }) {
 export default function DobraOfertaProdutos() {
   const sectionRef = useRef(null);
 
+  // Estado para gerenciar a cor selecionada para o KIT
+  const [selectedKitColor, setSelectedKitColor] = useState(null);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -117,15 +120,28 @@ export default function DobraOfertaProdutos() {
     };
   }, []);
 
-  const kitProductData = {
+  // Dados do Kit
+  const kitInfo = {
     id: 'kit-essencial',
-    title: "KIT BLENDSKIN: Sua Rotina Completa",
+    baseTitle: "KIT BLENDSKIN: Sua Rotina Completa", // Título base
     items: "Espuma de Limpeza + Sérum Vitamina C + BB Skin Blur",
-    image: '/images/blendskin-espuma.webp',
-    ctaLink: 'https://blendskin.pay.yampi.com.br/b/GHRGG0V8SOOW',
+    image: '/images/blendskin-espuma.webp', // Imagem padrão do kit, não muda com a cor
+    // Adicionado array de cores para o kit
+    colors: [
+      { label: 'Natural', value: 'natural', hex: '#F0D4BB', ctaLink: 'https://blendskin.pay.yampi.com.br/b/GHRGG0V8SOOW' }, // Link específico para o kit com BB Skin Natural
+      { label: 'Bege', value: 'bege', hex: '#D1B57E', ctaLink: 'https://blendskin.pay.yampi.com.br/b/HT0LITBKJ9S8' }, // Link específico para o kit com BB Skin Bege
+    ],
     ctaText: 'QUERO O KIT COMPLETO',
   };
 
+  // Inicializa a cor do kit selecionada apenas uma vez no carregamento
+  useEffect(() => {
+    if (kitInfo.colors && kitInfo.colors.length > 0) {
+      setSelectedKitColor(kitInfo.colors[0]);
+    }
+  }, []);
+
+  // Produtos individuais (o BBSKIN já tem a opção de cor)
   const productsData = [
     { id: 'espuma', name: 'Espuma De Limpeza Facial', image: '/produtos/bombom.png', priceImage: '/99.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/F4HUB8FAWX', ctaText: 'COMPRAR AGORA' },
     { id: 'serum', name: 'Sérum Vitamina C - PLUS', image: '/produtos/3.png', priceImage: '/189.svg', ctaLink: 'https://blendskin.pay.yampi.com.br/r/M83S60T0SY', ctaText: 'COMPRAR AGORA' },
@@ -152,19 +168,45 @@ export default function DobraOfertaProdutos() {
       <div className={styles.kitContainer}>
          <div className={styles.kitCard}>
           <div className={styles.kitImageSide}>
-            <img src={kitProductData.image} alt={kitProductData.title} loading="lazy"/>
+            <img src={kitInfo.image} alt={kitInfo.baseTitle} loading="lazy"/>
           </div>
           <div className={styles.kitContentSide}>
             <span className={styles.recommendedTag}>MAIS VENDIDO</span>
-            <h3 className={styles.kitTitle}>{kitProductData.title}</h3>
-            <p className={styles.kitItems}>{kitProductData.items}</p>
+            <h3 className={styles.kitTitle}>
+              {kitInfo.baseTitle} {selectedKitColor ? `(${selectedKitColor.label})` : ''}
+            </h3>
+            <p className={styles.kitItems}>{kitInfo.items}</p>
 
             <div className={styles.kitPriceContainer}>
               <img src="/349.svg" alt="Valor do kit completo" className={styles.kitPriceImage} />
             </div>
+
+            {/* Opções de cor para o Kit */}
+            {kitInfo.colors && selectedKitColor && (
+              <div className={styles.kitColorSelectionWrapper}>
+                <p className={styles.kitChooseColorText}>Escolha a cor do seu BB Skin:</p>
+                <div className={styles.kitColorOptionsContainer}>
+                  {kitInfo.colors.map((colorOption) => (
+                    <div key={colorOption.value} className={styles.kitColorOptionItem}>
+                      <button
+                        className={`${styles.kitColorSwatch} ${selectedKitColor.value === colorOption.value ? styles.selected : ''}`}
+                        style={{ backgroundColor: colorOption.hex }}
+                        onClick={() => setSelectedKitColor(colorOption)}
+                        aria-label={`Selecionar cor ${colorOption.label} para o Kit`}
+                      ></button>
+                      <p className={styles.kitColorLabel}>{colorOption.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
             
-            <a href={kitProductData.ctaLink} target="_blank" rel="noopener noreferrer" className={styles.kitCtaButton}>
-              {kitProductData.ctaText}
+            <a href={selectedKitColor ? selectedKitColor.ctaLink : kitInfo.colors[0].ctaLink} 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               className={styles.kitCtaButton}
+            >
+              {kitInfo.ctaText}
             </a>
           </div>
         </div>

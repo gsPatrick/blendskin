@@ -70,8 +70,13 @@
 .kitImageSide img { width: 100%; height: 100%; object-fit: cover; }
 .kitContentSide, .kitImageSide { z-index: 1; }
 .kitContentSide { flex: 1; padding: 60px; text-align: left; display: flex; flex-direction: column; justify-content: center;}
-.kitTitle { font-size: 2.5rem; color: var(--color-branco); }
-.kitItems { font-family: var(--font-corpo); margin-top: 0.5em; font-size: 1.2rem; color: rgba(255, 255, 255, 0.9);}
+.kitTitle { 
+  font-size: 2.5rem; 
+  color: var(--color-branco); 
+  margin-bottom: 0.5em; /* Espaçamento ajustado */
+}
+.kitItems { font-family: var(--font-corpo); margin-top: 0.5em; margin-bottom: 1.5em; font-size: 1.2rem; color: rgba(255, 255, 255, 0.9);}
+
 
 /* --- Preço do Kit CENTRALIZADO e MAIOR --- */
 .kitPriceContainer {
@@ -192,41 +197,8 @@
   margin: 0 auto 1.5em auto;
 }
 
-/* --- NOVOS ESTILOS PARA SELEÇÃO DE COR --- */
-.colorSelectionWrapper { /* Novo wrapper para texto de instrução e amostras */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px; /* Espaço entre o texto e as amostras */
-  margin-top: auto; /* Empurra esta seção para baixo, antes do botão */
-  flex-grow: 1; /* Permite que este wrapper preencha o espaço, se necessário */
-  justify-content: flex-end; /* Alinha o conteúdo ao final do seu container flex */
-}
-
-.chooseColorText { /* Estilo para o texto "Escolha sua cor:" */
-    font-family: var(--font-corpo);
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin: 0;
-}
-
-.colorOptionsContainer {
-  display: flex;
-  justify-content: center;
-  gap: 25px; /* AUMENTADO: Espaço entre as opções de cor */
-  margin-bottom: 2em; /* Espaço entre as opções de cor e o CTA */
-}
-
-.colorOptionItem { /* NOVO: Contém a amostra e o nome da cor */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px; /* Espaço entre a amostra e o nome */
-}
-
-.colorSwatch {
-  width: 30px;
-  height: 30px;
+/* --- BASE STYLES para Amostras de Cor (Comuns para Produtos Individuais e Kit) --- */
+.baseColorSwatch {
   border-radius: 50%;
   border: 2px solid transparent;
   cursor: pointer;
@@ -234,25 +206,127 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Base Style for SELECTED state (aplicado como .selected class) */
+.selected {
+  border-color: var(--color-dourado);
+  transform: scale(1.05);
+}
+
+/* --- ESTILOS PARA SELEÇÃO DE COR (Produtos Individuais) --- */
+.colorSelectionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+.chooseColorText {
+    font-family: var(--font-corpo);
+    font-size: 1.05rem; /* AUMENTADO */
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.colorOptionsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* AUMENTADO */
+  margin-bottom: 2em; /* Espaço entre as opções de cor e o CTA */
+}
+
+.colorOptionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Espaço entre a amostra e o nome */
+}
+
+.colorSwatch {
+  composes: baseColorSwatch; /* Reusa os estilos base da amostra */
+  width: 40px; /* AUMENTADO */
+  height: 40px; /* AUMENTADO */
+}
+
+.colorSwatch.selected { /* Estilos ESPECÍFICOS para o colorSwatch selecionado (NÃO USA COMPOSES AQUI) */
+  box-shadow: 0 0 0 2px var(--color-dourado), 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* border-color e transform vêm da classe .selected */
+}
+
 .colorSwatch:hover {
   border-color: rgba(var(--color-dourado-rgb), 0.5);
   transform: scale(1.1);
 }
 
-.colorSwatch.selected {
-  border-color: var(--color-dourado);
-  box-shadow: 0 0 0 2px var(--color-dourado), 0 4px 8px rgba(0, 0, 0, 0.3);
-  transform: scale(1.05);
-}
-
-.colorLabel { /* NOVO: Estilo para o nome da cor */
+.colorLabel {
     font-family: var(--font-corpo);
-    font-size: 0.95rem; /* Aumentado para legibilidade */
-    color: rgba(255, 255, 255, 0.85); /* Cor clara para contraste */
-    font-weight: 500; /* Levemente bold */
+    font-size: 1.1rem; /* AUMENTADO */
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
     margin: 0;
 }
-/* --- FIM DOS NOVOS ESTILOS --- */
+/* --- FIM DOS ESTILOS DE SELEÇÃO DE COR (Produtos Individuais) --- */
+
+
+/* --- Estilos ESPECÍFICOS para a seleção de cor no KIT --- */
+.kitColorSelectionWrapper {
+  margin-top: auto; /* Garante que se posicione acima do botão */
+  flex-grow: 1; /* Permite que o wrapper preencha o espaço */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Alinha o conteúdo ao final */
+  gap: 10px; /* Espaço entre texto e as opções */
+}
+
+.kitChooseColorText {
+  font-family: var(--font-corpo);
+  font-size: 1.25rem; /* AUMENTADO */
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  text-align: center; /* Centraliza no kit */
+}
+
+.kitColorOptionsContainer {
+  display: flex;
+  justify-content: center; /* Centraliza as amostras no kit */
+  gap: 40px; /* AUMENTADO */
+  margin-bottom: 2.5em; /* Espaço antes do botão do kit */
+}
+
+.kitColorOptionItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.kitColorSwatch { /* Reusa os estilos base da amostra E aplica tamanho do Kit */
+  composes: baseColorSwatch; 
+  width: 45px; /* AUMENTADO */
+  height: 45px; /* AUMENTADO */
+}
+
+.kitColorSwatch.selected { /* Estilos ESPECÍFICOS para o kitColorSwatch selecionado (NÃO USA COMPOSES AQUI) */
+  box-shadow: 0 0 0 3px var(--color-dourado), 0 5px 10px rgba(0, 0, 0, 0.4);
+  /* border-color e transform vêm da classe .selected */
+}
+
+.kitColorSwatch:hover { /* Hover para as amostras do kit */
+  border-color: rgba(var(--color-dourado-rgb), 0.5);
+  transform: scale(1.1);
+}
+
+.kitColorLabel {
+    font-family: var(--font-corpo);
+    font-size: 1.2rem; /* AUMENTADO */
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+    margin: 0;
+}
+/* --- FIM DOS ESTILOS ESPECÍFICOS DO KIT --- */
 
 
 .productCtaButton {
@@ -289,15 +363,19 @@
   .kitCtaButton, .kitPriceContainer { align-self: center; text-align: center; }
   .kitTitle { font-size: 2.2rem; }
   .kitPriceImage { height: 180px; } 
+  .kitChooseColorText { font-size: 1.15rem; } /* Ajuste de responsividade */
+  .kitColorOptionsContainer { gap: 25px; margin-bottom: 2em; }
+  .kitColorSwatch { width: 38px; height: 38px; } /* Ajuste de responsividade */
+  .kitColorLabel { font-size: 1.1rem; } /* Ajuste de responsividade */
 
   .productsGrid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-  .productImageContainer img { height: 280px; } /* Ajuste de altura da imagem */
+  .productImageContainer img { height: 280px; } 
   .productPriceImage { height: 95px; } 
-  .colorSwatch { width: 25px; height: 25px; } 
-  .colorOptionsContainer { gap: 20px; } /* Ajuste de gap */
-  .colorOptionItem { gap: 6px; } /* Ajuste de gap */
-  .chooseColorText { font-size: 0.9rem; }
-  .colorLabel { font-size: 0.9rem; }
+  .colorSwatch { width: 35px; height: 35px; } /* Ajuste de responsividade */
+  .colorOptionsContainer { gap: 25px; margin-bottom: 1.5em; } 
+  .colorOptionItem { gap: 6px; } 
+  .chooseColorText { font-size: 1rem; } /* Ajuste de responsividade */
+  .colorLabel { font-size: 1rem; } /* Ajuste de responsividade */
   .productCtaButton { min-height: 48px; padding: 12px 18px; } 
 }
 
@@ -308,16 +386,20 @@
   .kitTitle { font-size: 2rem; }
   .kitPriceImage { height: 160px; } 
   .kitCtaButton { width: calc(100% - 60px); }
+  .kitChooseColorText { font-size: 1.05rem; }
+  .kitColorOptionsContainer { gap: 20px; margin-bottom: 1.8em; }
+  .kitColorSwatch { width: 32px; height: 32px; }
+  .kitColorLabel { font-size: 1rem; }
 
   .productsGrid { grid-template-columns: 1fr; max-width: 350px; margin: 0 auto; }
-  .productImageContainer img { height: 240px; } /* Ajuste de altura da imagem */
+  .productImageContainer img { height: 240px; } 
   .productName { font-size: 1.5rem; }
   .productPriceImage { height: 85px; } 
-  .colorSwatch { width: 22px; height: 22px; } 
-  .colorOptionsContainer { gap: 15px; } /* Ajuste de gap */
-  .colorOptionItem { gap: 5px; } /* Ajuste de gap */
-  .chooseColorText { font-size: 0.85rem; }
-  .colorLabel { font-size: 0.85rem; }
+  .colorSwatch { width: 30px; height: 30px; } 
+  .colorOptionsContainer { gap: 20px; margin-bottom: 1.5em; } 
+  .colorOptionItem { gap: 5px; } 
+  .chooseColorText { font-size: 0.95rem; }
+  .colorLabel { font-size: 0.95rem; }
   .productCtaButton { min-height: 45px; padding: 10px 15px; }
 }
 
@@ -326,14 +408,18 @@
   .kitImageSide { height: 200px; }
   .kitTitle { font-size: 1.8rem; }
   .kitPriceImage { height: 140px; } 
+  .kitChooseColorText { font-size: 0.95rem; }
+  .kitColorOptionsContainer { gap: 15px; margin-bottom: 1.5em; }
+  .kitColorSwatch { width: 28px; height: 28px; }
+  .kitColorLabel { font-size: 0.9rem; }
 
-  .productImageContainer img { height: 220px; } /* Ajuste de altura da imagem */
+  .productImageContainer img { height: 220px; } 
   .productName { font-size: 1.4rem; }
   .productPriceImage { height: 75px; } 
-  .colorSwatch { width: 20px; height: 20px; } 
-  .colorOptionsContainer { gap: 10px; } /* Ajuste de gap */
-  .colorOptionItem { gap: 4px; } /* Ajuste de gap */
-  .chooseColorText { font-size: 0.8rem; }
-  .colorLabel { font-size: 0.8rem; }
+  .colorSwatch { width: 25px; height: 25px; } 
+  .colorOptionsContainer { gap: 15px; margin-bottom: 1.2em; }
+  .colorOptionItem { gap: 4px; } 
+  .chooseColorText { font-size: 0.9rem; }
+  .colorLabel { font-size: 0.9rem; }
   .productCtaButton { min-height: 40px; padding: 8px 12px; }
 }
