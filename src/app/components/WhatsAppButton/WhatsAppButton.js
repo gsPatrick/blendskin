@@ -9,7 +9,7 @@ export default function WhatsAppButton() {
     const [isVisible, setIsVisible] = useState(false);
 
     // Link do WhatsApp
-    const whatsappLink = "https://wa.me/5562084077070?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20produtos%20BlendSkin.";
+    const whatsappLink = "https://wa.me/5562984077070";
 
     // Efeito para mostrar o botão com um pequeno atraso após a página carregar
     useEffect(() => {
